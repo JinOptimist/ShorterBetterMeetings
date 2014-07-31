@@ -1,0 +1,61 @@
+﻿@model SBM.Web.Models.Account.RegistrationModel
+
+@{
+    ViewBag.Title = SBM.Web.Constants.SiteConstant.SiteName + " | Sign Up";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/styles/signup")
+
+<div id="main" class="signup">
+    <div class="wrapper">
+        <h2>Sign Up</h2>
+        @using (Html.BeginForm(MVC.Account.Register(Model.ReturnUrl), FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.ReceivePromotions)
+            <div class="control-group first-half">
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName, new { autofocus="autofocus"})
+                <div class="error">@Html.ValidationMessageFor(m => m.FirstName)</div>
+            </div>
+            <div class="control-group last-half">
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, new { autofocus="autofocus"})
+                <div class="error">@Html.ValidationMessageFor(m => m.LastName)</div>
+            </div>                    
+            <div class="control-group clear">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { type = "email"}) 
+                <span class="hint">Will be user as Username. This is should be your working email or email you use scheduling the meetings</span>
+                <div class="error">@Html.ValidationMessageFor(m => m.Email)</div>
+            </div>
+            <div class="control-group clear">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                <span class="hint">Length between 6 and 10 characters</span>
+                <div class="error">@Html.ValidationMessageFor(m => m.Password)</div>
+            </div>
+            <div class="control-group clear">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                <div class="error">@Html.ValidationMessageFor(m => m.ConfirmPassword)</div>
+            </div>
+            <div class="control-group agree clear">
+                <label for="SBMTerms">
+                    @Html.CheckBoxFor(m => m.SBMTerms)
+                    I agree to <a class="popupLink" href="@Url.Action(MVC.Account.AcceptTerms())">ShorterBetterMeetings Terms</a>
+                </label>
+                <div class="error">@Html.ValidationMessageFor(m => m.SBMTerms)</div>
+            </div>
+            <div class="control-group action">
+                <button class="btn primary" type="submit">
+                    <span>Sign up</span>
+                </button>
+            </div>
+            <div class="clear"></div>
+        }
+    </div>
+</div>
+
+ @Scripts.Render("~/bundles/jqueryval")
+

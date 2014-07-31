@@ -1,0 +1,39 @@
+﻿.no-close .ui-dialog-titlebar-close {
+    display: none;
+}
+
+.ui-widget-overlay {
+    background-color: rgba(0,0,0,0.5);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.overlay-hidden {
+    opacity: 0.0;
+    filter: alpha(opacity=0); /* IE8 and lower */
+}
+
+.error, .validation-summary-errors, .container .error span, .container .validation-summary-errors span {
+    color: red;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.validation-summary-errors {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.popupLink, .popupBtn, .popup, .SBMTerms, .ok-close, .cancel {
+}
+
+.popupLink-light, .popupBtn-light, .popup-light, .ok-close-light, .remove-group, .cancel-light, .invite-to-group-confirm, .close-modal-light, .forbidden-msg, .request-invite, .find-groups-btn
+.find-groups-form, .label, .change-password-btn, .invite-submit, .invite-colleagues-form, .error-valid {
+}

@@ -1,0 +1,146 @@
+﻿@using SBM.Domain.Authentification
+@using SBM.Domain.Models.Enums
+@model SBM.Web.Models.Meeting.MeetingSurveyModel
+
+@{
+    ViewBag.Title = "Meeting Survey";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/surveys")
+@Styles.Render("~/Content/styles/baseaccount-survey")
+@Styles.Render("~/Content/styles/newsurvey")
+@Scripts.Render("~/bundles/questionSurvey")
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Account.Dashboard())">Home</a>
+    </li>
+    <li>/</li>
+    <li>
+        <a href="@Url.Action(MVC.Meeting.AvailableMeetingSurveyList())">Surveys</a>
+    </li>
+    <li>/</li>
+    <li>
+        @Model.Meeting.Title
+    </li>
+</ul>
+<div class="container">
+    <h3>New Survey</h3>
+    <div class="segment">
+        <div class="segment-body">
+            <div class="new-survey">
+                <div class="meeting-title">
+                    @Model.Meeting.Title
+                </div>
+                <div class="meeting-details">
+                    <div class="table-row">
+                        <div class="meeting-members">
+                            @foreach (var user in Model.Meeting.Users)
+                            {
+                                <text>
+                                @(Model.Meeting.Users.First().Equals(user) ? string.Empty : ",")@user.FirstName @user.LastName
+                                </text>
+                            }
+                        </div>
+                        <div class="meeting-location">
+                            <i class="surveys-ico ico-date"></i>
+                            @Model.Meeting.EndDate.ToLongDateString()
+                            <br>
+                            <i class="surveys-ico ico-location"></i>
+                            @Model.Meeting.Location
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @using (Html.BeginForm(null, null, FormMethod.Post))
+            {
+                @Html.Hidden("QuestionCount", Model.Questions.Count)
+                @Html.HiddenFor(x => x.Meeting.Id)
+                <ul id="questions">
+                    @if (Model.Meeting.Owner != null && Model.Meeting.Owner.Id == FormsAuthenticationHelper.CurrentUser.Id)
+                    {
+                        <li>
+                            <div class="question">
+                                What type of meeting was it? <span id="questionRequiredMeetingType" class="question-required">Please run through the questions. All answers are required.</span>
+                            </div>
+                            <button class="button button-positive button-meeting-type" type="button" data-value="@MeetingType.ConferenceCallOrOnline">Conferenсe Call/Online</button>
+                            <button class="button button-positive button-meeting-type" type="button" data-value="@MeetingType.FaceToFace">Face-to-Face</button>
+                            <button class="button button-positive button-meeting-type" type="button" data-value="@MeetingType.Combination">Combination</button>
+                            @Html.HiddenFor(x => x.Meeting.MeetingType)
+                        </li>
+                    }
+                    @for (var i = 0; i < Model.Questions.Count; i++)
+                    {
+                        <li>
+                            @Html.HiddenFor(x => x.Questions[i].Id)
+                            @{ var question = Model.Questions[i]; }
+                            @if (question.Type == QuestionType.OME)
+                            {
+                                <div class="question">
+                                    @question.QuestionText <span id="questionRequired@(i)" class="question-required">Please run through the questions. All answers are required.</span>
+                                    <span>1 = Not at all Effective
+                                        <br>
+                                        10 = Very Effective
+                                    </span>
+                                </div>
+                                for (var j = 0; j < question.Answers.Count; j++)
+                                {
+                                    var answer = question.Answers[j];
+                                <div class="question-group-@i answer" data-question-id="@i" data-answer-id="@j" data-type="@question.Type">
+                                    <input id="effective-@j" name="effectiveness" type="radio" class="radio-style " >
+                                    <label for="effective-@j">
+                                        @answer.AnswerText
+                                    </label>
+                                </div>
+                                @Html.HiddenFor(x => x.Questions[i].Answers[j].Selected, new { @class = "selected-question-" + i })
+                                @Html.HiddenFor(x => x.Questions[i].Answers[j].Id)
+                                @Html.HiddenFor(x => x.Questions[i].Answers[j].AnswerText)
+                                }
+                            }
+                            else
+                            {
+                                <div class="question">
+                                    @question.QuestionText <span id="questionRequired@(i)" class="question-required">Please run through the questions. All answers are required.</span>
+                                </div>
+                                for (var j = 0; j < question.Answers.Count; j++)
+                                {
+                                    var answer = question.Answers[j];
+                                    var styleAnswer = string.Empty;
+                                    switch (answer.StyleType)
+                                    {
+                                        case AnswerStyleType.Positive:
+                                            {
+                                                styleAnswer = "button-positive";
+                                                break;
+                                            }
+                                        case AnswerStyleType.Negative:
+                                            {
+                                                styleAnswer = "button-negative";
+                                                break;
+                                            }
+                                        case AnswerStyleType.Indifferent:
+                                            {
+                                                styleAnswer = "button-indifferent";
+                                                break;
+                                            }
+                                    }
+                                <a href="#" class="button @styleAnswer question-group-@i answer" data-question-id="@i" data-answer-id="@j" data-type="@question.Type"  data-style-type="@answer.StyleType">@answer.AnswerText</a>
+                                @Html.HiddenFor(x => x.Questions[i].Answers[j].Selected, new { @class = "selected-question-" + i })
+                                @Html.HiddenFor(x => x.Questions[i].Answers[j].Id)
+                                @Html.HiddenFor(x => x.Questions[i].Answers[j].AnswerText)
+                                }
+                            }
+                        </li>
+                    }
+                    <li>
+                        <div class="private">
+                            We treat all your data as private and confidential
+                        </div>
+                        <a href="#" id="apply-button" class="button">SUBMIT</a>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GoogleGetToken</title>
+    <script>
+        var token;
+        var anchorValue;
+        var url = document.location;
+        var strippedUrl = url.toString().split("#");
+        if (strippedUrl.length > 1)
+            anchorvalue = strippedUrl[1];
+        var anchors = anchorvalue.split("&");
+        for (var i = 0 ; i < anchors.length; i++) {
+            if (anchors[i].indexOf("access_token") > -1) {
+                token = anchors[i].split("=")[1];
+            }
+        }
+        
+        var newUrl = "@Url.Action(MVC.Account.GoogleAuthComplete(""))" + "?token=" + token;
+        document.location = newUrl;
+</script>
+</head>
+<body>
+    <div>
+        Test
+    </div>
+</body>
+</html>

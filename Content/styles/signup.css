@@ -1,0 +1,37 @@
+.signup .agree {
+    float: left;
+    margin-top: 30px;
+    width: 300px;
+}
+.signup .agree label {
+    font-size: 13px;
+}
+.signup .action {
+    float: left;
+    margin: 24px 0 0 22px;
+}
+#terms-conditions .modal {
+	height: 666px;
+	margin-left: -440px;
+	margin-top: -363px;
+	width: 800px;
+}
+#terms-conditions p {
+	font-size: 14px;
+	line-height: 26px;
+	margin-bottom: 25px;  
+}
+#terms-conditions .btn span {
+	min-width: 70px;
+}
+#terms-conditions-toggle {
+	font-size: 13px;
+	position: relative;
+	top: -8px;
+}
+#terms-conditions label {
+	float: none;
+}
+#terms-conditions .action {
+	text-align: center;
+}

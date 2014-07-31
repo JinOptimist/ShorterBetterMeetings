@@ -1,0 +1,73 @@
+﻿@using SBM.Domain.Models.Enums
+@using StringExtensions = SBM.Common.Extensions.StringExtensions
+@model SBM.Web.Models.Account.Charts.QuestionModel
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart@(Model.QuestionId));
+    function drawChart@(Model.QuestionId)() {
+        var data = google.visualization.arrayToDataTable([
+            ['@Model.QuestionText', 'Hours per Day'],
+            @foreach (var answer in Model.AnswerModels)
+            {
+                <text>['@answer.AnswerText', @StringExtensions.DoubleToString(answer.AnswerPercent)],</text>
+            }
+        ]);
+
+        var options = {
+            @*title: '@Model.QuestionText',*@
+            titleTextStyle:
+              {
+                  color: 'black',
+                  fontSize: 20,
+                  //text-align: 'center'
+              },
+            legend: {
+                position: 'right',
+                alignment: 'center'
+            },
+            colors: [
+                @foreach (var answer in Model.AnswerModels)
+                {
+                    switch (answer.StyleType)
+                    {
+                        case AnswerStyleType.Positive:
+                            {
+                                <text>'#118211',</text>
+                                break;
+                            }
+                        case AnswerStyleType.Negative:
+                            {
+                                <text>'#d31145',</text>
+                                break;
+                            }
+                        case AnswerStyleType.Indifferent:
+                            {
+                                <text>'#0d7297',</text>
+                                break;
+                            }
+                    }
+                }
+            ],
+            chartArea: { left: 10, top: 10, width: '100%', height: '90%' }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart@(Model.QuestionId)'));
+        chart.draw(data, options);
+    }
+</script>
+@Html.Hidden("Q" + Model.QuestionId, Model.QuestionId, new { @class = "questionIds" })
+<div class="table-cell">
+    <div class="diagram-box">
+        <h6>@Model.Title @Model.QuestionText</h6>
+        <div class="image-box">
+            <div id="piechart@(Model.QuestionId)" style="width: 350px; height: 230px;"></div>
+        </div>
+        <div> 
+            <a href="@Url.Action(MVC.Account.DetailedAnalysis(Model.QuestionId))" class="button" style="position: relative;">Detailed Analysis</a>
+           @* <button type="submit" value="Detailed Analysis" "@Url.Action(MVC.Account.DetailedAnalysis(Model.QuestionId))" class="button" style="position: relative;"></button> *@
+           
+        </div>
+    </div>
+</div>

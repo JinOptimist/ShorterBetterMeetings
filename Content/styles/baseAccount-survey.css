@@ -1,0 +1,62 @@
+﻿.segment-body i {
+    margin: 0;
+}
+#slider-range a span {
+    width: 16px;
+    right: 0px;
+}
+.button {
+	margin: 15px 20px 0 0;
+	min-width: 110px;
+	cursor: pointer;
+}
+.button-positive {
+	background: #fff;
+	border: 1px solid #118211;
+	color: #118211; 
+}
+.button-positive:hover {
+	background: #fff;
+	box-shadow: inset 0px 0px 0px 1px #118211;
+	color: #118211; 
+}
+.button-positive.selected {
+	background: #118211;
+	color: #fff;
+}
+.button-positive.selected:hover {
+	background: #118211;
+	color: #fff;
+}
+.button-negative:hover {
+	background: #fff;
+	box-shadow: inset 0px 0px 0px 1px #d31145;
+	color: #d31145;
+}
+.button-negative.selected {
+	background: #d31145;
+	color: #fff;
+}
+
+.button-negative.selected:hover {
+	background: #d31145;
+	color: #fff;
+}
+.button-indifferent {
+	background: #fff;
+	border: 1px solid #0d7297;
+	color: #0d7297;
+}
+.button-indifferent:hover {
+	background: #fff;
+	box-shadow: inset 0px 0px 0px 1px #0d7297;
+	color: #0d7297;
+}
+.button-indifferent.selected {
+	background: #0d7297;
+	color: #fff;
+}
+.button-indifferent.selected:hover {
+	background: #0d7297;
+	color: #fff;
+}

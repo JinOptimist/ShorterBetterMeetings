@@ -1,0 +1,37 @@
+﻿@model SBM.Domain.Models.Entities.UserGroup
+
+@{
+    ViewBag.Title = "Invitation to Group";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/usergroups")
+@Styles.Render("~/Content/styles/baseaccount-usergroup")
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Home.Index())">Home</a>
+    </li>
+    <li>/</li>
+    <li>
+        <a href="@Url.Action(MVC.UserGroup.MyUserGroups())">User Groups</a>
+    </li>
+    <li>/</li>
+    <li>Invitation to Group</li>
+</ul>
+
+<div class="container">
+    <div id="forbidden-msg">
+        <h3>Invitation to Group</h3>
+        <h6>You will be added to group "@Model.Name". </h6>
+        <br/>
+        <br/>
+        <button class="btn primary invite-to-group-confirm" type="button" data-url="@Url.Action(MVC.UserGroup.InviteColleagueConfirm(Model.Id))" data-returnurl="@Url.Action(MVC.UserGroup.MyUserGroups())">
+            <span>OK</span>
+        </button>
+        <button onclick="window.location.href='@Url.Action(MVC.UserGroup.MyUserGroups())';" class="btn primary" type="button">
+            <span>Cancel</span>
+        </button>
+        <div class="clear"></div>
+    </div>
+</div>

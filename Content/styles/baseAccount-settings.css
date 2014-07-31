@@ -1,0 +1,9 @@
+form.settings-form .segment-body label {
+    display: block;
+    height: 20px;
+    padding: 8px 10px 0 10px;
+}
+
+form .box:first-child {
+	padding-top: 0;
+} 

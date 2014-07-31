@@ -1,0 +1,48 @@
+#updatemeetings, #serveystotake  {
+    float: right;
+    height: 48px;
+    position: relative;
+}
+
+#updatemeetings, #serveystotake {
+    padding-right: 20px;
+}
+
+#updatemeetings {
+    padding: 32px 35px 0 18px;
+}
+
+#serveystotake {
+    padding: 32px 0px 0 18px;
+}
+
+#serveystotake a{
+    display: block;
+    padding-right: 10px;
+}
+
+#notifications {
+    padding-left: 0;
+}
+
+/*#serveystotake span {
+    color: #000;
+}*/
+
+.notifications-toggle{}
+
+.navigation li#nav-usergroup {
+    height: 125px;
+}
+
+    .navigation li#nav-usergroup a {
+        padding-left: 35px;
+        height: 25%;
+    }
+
+        .navigation li#nav-usergroup a#usergroup {
+            padding-left: 0;
+            padding-bottom: 0;
+        }
+
+

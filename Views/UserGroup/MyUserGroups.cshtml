@@ -1,0 +1,123 @@
+﻿@model SBM.Web.Models.UserGroup.MyUserGroupModel
+
+@{
+    ViewBag.Title = "My user groups";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/newsurvey")
+@Styles.Render("~/Content/styles/baseaccount-survey")
+@Styles.Render("~/Content/styles/usergroups")
+@Styles.Render("~/Content/styles/baseaccount-usergroup")
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Home.Index())">Home</a>
+    </li>
+    <li>/</li>
+    <li>User Groups
+    </li>
+</ul>
+<div class="container">
+    <h3>User Groups</h3>
+    <div class="segment">
+        <div class="segment-header">
+            <h5>My user groups</h5>
+            <a href="@Url.Action(MVC.UserGroup.Create())" id="create-group" class="popupLink-light">Create new user group</a>
+        </div>
+        <div class="segment-body table">
+            <div class="table-row-join">
+                <div class="table-cell-join">
+                    <div class='find-groups'>
+                        <h3>See what groups you can join in</h3>
+                        <h6>Just type your colleague's email and request an invitation into one of his or her groups</h6>
+                        @using (Html.BeginForm(MVC.UserGroup.GetUserGroupByUserEmail(), FormMethod.Post, new { @class = "find-groups-form" }))
+                        {
+                            <div>
+                                @Html.TextBoxFor(m => m.ColeagueEmail, new { placeholder = "Add colleague's email", type = "email", autofocus="autofocus" })
+                                <button id="get-group-by-useremail" class="button button-negative find-groups-btn" type="submit" data-requestInviteUrl ="@Url.Action(MVC.UserGroup.RequestInvite()) ">
+                                    Find Groups
+                                </button>
+                                <div class="clear"></div>
+                                <div class="error">@Html.ValidationMessageFor(m => m.ColeagueEmail)</div>
+                            </div>
+                            <div class="clear"></div>
+                        }
+                    </div>
+                    <div id='searchResults' class="table-row results">
+                        <div class="table-cell">
+                            <table>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="">&nbsp;</div>
+            </div>
+            <div class="clear"></div>
+            @for (var i = 0; i < Model.UserGroups.Count(); i = i + 2)
+            {
+                var group = Model.UserGroups[i];
+                <div class="table-row">
+                    <div class="table-cell" id="userGroup-@group.Id">
+                        <div class="table-cell-header">
+                            <h6>@group.Name</h6>
+                            <a class="user-group-settings popupLink-light tooltip red-tooltip" href="@Url.Action(MVC.UserGroup.Delete(group.Id))">
+                                <span>Leave User Group</span>
+                                <i class="user-group-ico log-out-ico"></i>
+                            </a>
+                            <a href="@Url.Action(MVC.UserGroup.InviteColleague(group.Id))" class="popupLink-light user-group-settings tooltip red-tooltip">
+                                <span>Invite Colleague</span>
+                                <i class="user-group-ico invite-colleague-ico"></i>
+                            </a>
+                        </div>
+                        <table> 
+                            @foreach (var user in group.Users)
+                            {
+                                <tr>
+                                    <td>@user.FirstName @user.LastName</td>
+                                    <td class="email">
+                                        <a href="mailto:@user.Email">@user.Email</a>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    @if (i + 1 < Model.UserGroups.Count())
+                    {
+                        var group2 = Model.UserGroups[i + 1];
+                        <div class="table-cell" id="userGroup-@group2.Id">
+                            <div class="table-cell-header">
+                                <h6>@group2.Name</h6>
+                                <a class="user-group-settings popupLink-light tooltip red-tooltip" href="@Url.Action(MVC.UserGroup.Delete(group2.Id))">
+                                    <span>Leave User Group</span>
+                                    <i class="user-group-ico log-out-ico"></i>
+                                </a>
+                                <a href="@Url.Action(MVC.UserGroup.InviteColleague(group2.Id))" class="popupLink-light user-group-settings tooltip red-tooltip">
+                                    <span>Invite Colleague</span>
+                                    <i class="user-group-ico invite-colleague-ico"></i>
+                                </a>
+                            </div>
+                            <table>
+                                @foreach (var user2 in group2.Users)
+                                {
+                                    <tr>
+                                        <td>@user2.FirstName @user2.LastName</td>
+                                        <td class="email">
+                                            <a href="mailto:@user2.Email">@user2.Email</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-cell"></div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")

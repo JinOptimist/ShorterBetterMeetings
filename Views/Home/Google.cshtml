@@ -1,0 +1,55 @@
+﻿@model SBM.Web.Models.Google.Google
+@{
+    ViewBag.Title = "Google";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="width: 550px;float: left;">
+    <h1>User Info</h1>
+    <div>User.Email: @Model.User.Email</div>
+    <div>User.Name: @Model.User.Name</div>
+    <img src="@Model.User.Picture"/>
+</div>
+
+<div style="width: 500px;float: left;">
+    <h1>Events</h1>
+    @foreach (var googleEvent in Model.CalendarEvents.Events)
+    {
+        <div><b>EVENT</b></div>
+        <div>
+            Created: @googleEvent.Created.ToLongDateString()
+        </div>
+        <div>
+            Update: @googleEvent.Update.ToLongDateString()
+        </div>
+        <div>
+            Start: @googleEvent.Start.ToLongDateString() @googleEvent.Start.ToLongTimeString()
+        </div>
+        <div>
+            End: @googleEvent.End.ToLongDateString() @googleEvent.End.ToLongTimeString()
+        </div>
+        <div>
+            Summary: @googleEvent.Summary
+        </div>
+        <div>
+            Description: @googleEvent.Description
+        </div>
+        if (googleEvent.Attendees != null)
+        {
+            <div><b>Attendees:</b></div>
+            foreach (var user in googleEvent.Attendees)
+            {
+                <div>
+                    DisplayName: @user.DisplayName
+                </div>
+                <div>
+                    Email: @user.Email
+                </div>
+                <div>
+                    ResponseStatus: @user.ResponseStatus
+                </div>
+            }
+        }
+        <div>-</div>
+    }
+</div>

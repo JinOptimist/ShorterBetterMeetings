@@ -1,0 +1,220 @@
+﻿@using SBM.Domain.Authentification
+@using SBM.Domain.Models.Entities
+@using SBM.Domain.Models.Enums
+@using SBM.Domain.Repositories.Interfaces
+
+@{
+    var user = FormsAuthenticationHelper.CurrentUser;
+    var newMeeint = new List<PMS>();
+    var newMeetingCount = 0;
+    if (user != null)
+    {
+        var pmsRepository = DependencyResolver.Current.GetService<IPMSRepository>();
+        newMeeint = pmsRepository.GetAvalibleMeeting(user, 10);
+        newMeetingCount = pmsRepository.GetCountAvalibleMeeting(user);
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/Content/styles/reset")
+    @Styles.Render("~/Content/styles/baseaccount")
+    @Styles.Render("~/Content/styles/custom")
+    @Styles.Render("~/Content/styles/prettycheckable")
+    @Styles.Render("~/Content/styles/popup")
+    @Styles.Render("~/Content/styles/popup-usergroup")
+    @Styles.Render("~/Content/styles/tooltip")
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/prettycheckable")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/ui")
+    @Scripts.Render("~/bundles/popup")
+
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="popup"></div>
+    <div class="popup-light"></div>
+    <div class="global-wrapper">
+        <header id="header">
+            <div class="wrapper">
+                <a href="@Url.Action(MVC.Home.Index())" id="logo" title="ShorterBetterMeetings.com | Home">
+                    <img src="~/Content/images/logo-dashboard.png" alt="logo" height="22" width="279">
+                </a>
+                <div id="profile">
+                    <a href="#" id="profile-toggle">
+                        <img src="@(string.IsNullOrEmpty(user.AvatarSrc) ? Url.Content("~/Content/images/user-icon.png") : user.AvatarSrc)" alt="profile" height="45" width="45">
+                        @if (@user != null)
+                        {
+                            <span>
+                                @user.FirstName @user.LastName
+                            </span>
+                        }
+                    </a>
+                    <ul class="profile-dropdown" id="profile-dropdown">
+                        <li>
+                            <a href="@Url.Action(MVC.Home.Index())">
+                                <i class="profile-ico profile-home"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Account.EditProfile())">
+                                <i class="profile-ico profile-profile"></i>
+                                My profile
+                            </a>
+                        </li>
+                        <li>
+                            @*<a href="@Url.Action(MVC.UserGroup.MyUserGroups())">*@
+                            <a href="@Url.Action(MVC.UserGroup.InviteColleague())" class="popupLink-light ">
+                                <i class="profile-ico profile-invite"></i>
+                                Invite a collegue
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Home.PremiumAccess())">
+                                <i class="profile-ico profile-signup"></i>
+                                Sign up for premium
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Account.Logout())">
+                                <i class="profile-ico profile-out"></i>
+                                Log out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="notifications">
+                    <button type="button" class="messages notifications-toggle">
+                        @if (newMeetingCount != 0)
+                        {
+                            <i class="messages-background">
+                                <span class="messages-count">
+                                    @newMeetingCount
+                                </span>
+                            </i>
+                        }
+                    </button>
+                    <div class="notifications-dropdown" id="notifications-dropdown">
+                        <h5>You have @newMeetingCount surveys to take</h5>
+                        <ul>
+                            @foreach (var pms in newMeeint)
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.Meeting.MeetingSurvey(pms.Id))">@pms.Title
+                                        <span class="date">@pms.EndDate.ToShortDateString()</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                        <a href="@Url.Action(MVC.Meeting.AvailableMeetingSurveyList())" id="see-all">See all surveys &rsaquo;</a>
+                    </div>
+                </div>
+                <div id="serveystotake">
+                    <a href="#" class="notifications-toggle">
+                        <span>Surveys to take</span>
+                    </a>
+                </div>
+                @*<div id="updatemeetings">
+                    <a href="@Url.Action(MVC.Account.UpdateMeeting())">Update Meetings</a>
+                </div>*@
+            </div>
+        </header>
+        <div class="content">
+            <div class="sidebar" id="sidebar">
+                <div id="sidebar-layout">
+                    <a href="#" id="hide-show"></a>
+                    <ul class="navigation" id="menu">
+                        <li>
+                            <a href="@Url.Action(MVC.Account.Dashboard())">
+                                <i class="navigation-ico navigation-dashboard"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Account.DetailedAnalysis())">
+                                <i class="navigation-ico navigation-analysis"></i>
+                                <span>Detailed analysis</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Meeting.AvailableMeetingSurveyList())">
+                                <i class="navigation-ico navigation-surveys"></i>
+                                <span>Surveys</span>
+                                @if (newMeetingCount != 0)
+                                {
+                                    <i class="messages-background">
+                                        <em class="messages-count">@newMeetingCount</em>
+                                    </i>
+                                }
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Account.EditProfile())">
+                                <i class="navigation-ico navigation-profile"></i>
+                                <span>My profile</span>
+                            </a>
+                        </li>
+                        <li id="nav-usergroup">
+                            <a id="usergroup" href="@Url.Action(MVC.UserGroup.MyUserGroups())">
+                                <i class="navigation-ico navigation-groups"></i>
+                                <span>User groups</span>
+                            </a>
+                            <a href="@Url.Action(MVC.UserGroup.InviteColleague())" id="nav-usergroup-invite" class="popupLink-light ">
+                                <span>&#9675; &nbsp; Invite a Colleague</span>
+                            </a>
+                            <a href="@Url.Action(MVC.UserGroup.MyUserGroups())" id="nav-usergroup-joinGroup">
+                                <span>&#9675; &nbsp; Join User Group</span>
+                            </a>
+                            <a href="@Url.Action(MVC.UserGroup.Create())" id="nav-usergroup-createGroup" class="popupLink-light">
+                                <span>&#9675; &nbsp; Create User Group</span>
+                            </a>
+                        </li>
+                        @if (user.AccountType == AccountType.Admin)
+                        {
+                            <li>
+                                <a href="@Url.Action(MVC.Questions.QuestionList())">
+                                    <i class="navigation-ico navigation-settings"></i>
+                                    <span>Edit Question</span>
+                                </a>
+                            </li>
+                        }
+                        <li>
+                            <a href="@Url.Action(MVC.User.UserSettings())">
+                                <i class="navigation-ico navigation-settings"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <section id="main" class="section-animated">
+                @RenderBody()
+            </section>
+        </div>
+        <div class="push"></div>
+    </div>
+    <footer id="footer">
+        <div class="footer-wrapper">
+            <p class="copyright">&copy; 2014 ShorterBetterMeetings. All Rights Reserved</p>
+            <ul class="links">
+                <li><a href="#">Contact Us</a></li>
+                <li><a class="ico-link facebook" href="#" title="Connect with us on Facebook"></a></li>
+                <li><a class="ico-link linkedin" href="#" title="Connect with us on LinkedIn"></a></li>
+                <li><a class="ico-link twitter" href="#" title="Connect with us on Twitter"></a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
+

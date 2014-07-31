@@ -1,0 +1,82 @@
+.segment:last-child {
+	margin-top: 30px;
+}
+.segment-body {
+	padding: 20px 25px;
+}
+.box {
+	border-bottom: 1px solid #e3e3e3;
+	overflow: hidden;
+	padding: 20px 0;
+	position: relative;
+}
+.box:first-child {
+	padding-top: 0px;
+}
+.box:last-child {
+	border-bottom: none;
+	padding-bottom: 0px;
+}
+form .box:first-child {
+	padding-top: 20px;
+} 
+.box h5 {
+	color: #d31145;
+	margin-bottom: 10px;
+}
+.box select {
+	width: 240px;
+}
+.box form {
+	position: relative;
+}
+#choose-groups {
+	font-size: 13px;
+	position: absolute;
+	right: 0;
+	text-decoration: underline;
+	top: 28px;
+}
+#choose-groups:hover {
+	text-decoration: none;
+}
+.action .button {
+	float: right;
+	margin-left: 20px;
+	min-width: 95px;
+}
+#slider-range {
+	left: 10px;
+	width: 242px;
+}
+.min-value {
+	margin-left: 4px;
+}
+.max-value {
+	float: none;
+	left: 231px;
+	position: relative;
+}
+/*.modal {
+    margin-left: -165px;
+    margin-top: -124px;
+    padding: 30px 40px;
+    width: 250px;
+}
+.modal form {
+    font-weight: 600;
+    padding-top: 25px;
+}
+.modal form label {
+	display: block;
+	font-size: 14px;
+	height: 20px;
+	padding: 8px 10px 0 10px;
+}*/
+.action {
+	text-align: center;
+}
+#ok-button {
+	float: none;
+	margin-top: 15px;
+}

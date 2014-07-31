@@ -1,0 +1,18 @@
+﻿@using SBM.Common.Extensions
+@using SBM.Domain.Models.Enums
+@model SBM.Domain.Models.Entities.Question
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<h2>Add Question</h2>
+
+@using (Html.BeginForm(MVC.Questions.AddQuestion(), FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.TextBoxFor(x => x.QuestionText, new { style = "width: 300px;" })
+    @Html.DropDownListFor(x => x.Type, EnumExtensions.GetDropDown(typeof(QuestionType)), new { style = "width: 200px;" })
+    <input type="submit" value="Save" />
+    <div class="clear"></div>
+}

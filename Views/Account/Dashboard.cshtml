@@ -1,0 +1,208 @@
+﻿@using SBM.Domain.Models.Enums
+@model SBM.Web.Models.Account.DashboardModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/jqueryui")
+@Styles.Render("~/Content/styles/dashboard")
+
+@Scripts.Render("~/bundles/dashboard")
+@Scripts.Render("~/bundles/uislider")
+
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Home.Index())">Home</a>
+    </li>
+    <li>/</li>
+    <li>Dashboard
+    </li>
+</ul>
+<div class="container">
+    @Html.Hidden("UpdateOmeUrl", Url.Action(MVC.Account.GetOme()))
+    @Html.Hidden("UpdatePieUrl", Url.Action(MVC.Account.GetPeiCharts()))
+    @Html.Hidden("UpdateDateRangeUrl", Url.Action(MVC.Account.GetDateRange()))
+
+    @Html.Hidden("TargetLine", SBM.Common.Extensions.StringExtensions.DoubleToString(Model.TargetLine))
+    <h3>Dashboard</h3>
+    <span>meeting effectiveness and more</span>
+    <div class="calendar">
+        @{
+          var curCulture = new System.Globalization.CultureInfo("en-US", false); 
+        <a href="#" class="calendar-toggle" id="calendar-toggle">@Model.StartDate.ToString("MMMM dd,yyyy", curCulture) - @Model.EndDate.ToString("MMMM dd,yyyy", curCulture)  @*February 27,2014 - May 27,2014*@
+        </a>
+        }
+       <ul class="calendar-dropdown" id="calendar-dropdown">
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Week ? "primary" : "")" type="button"  data-value="@TimeLine.Week">A week</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Week2 ? "primary" : "")" type="button"  data-value="@TimeLine.Week2">2 weeks</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month ? "primary" : "")" type="button" data-value="@TimeLine.Month">A month</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month3 ? "primary" : "")" type="button"  data-value="@TimeLine.Month3">3 Months</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month6 ? "primary" : "")" type="button"  data-value="@TimeLine.Month6">6 Months</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month12 ? "primary" : "")" type="button"  data-value="@TimeLine.Month12">12 Months</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month24 ? "primary" : "")" type="button"  data-value="@TimeLine.Month24">24 Months</button>
+            </li>
+            @*<li>
+                <button class="button" id="range-toggle" type="button">Custom Range</button>
+                <div id="range-dropdown">
+                    <form name="period" method="post" action="#">
+                        <div id="range-from">
+                            <label for="from">From</label>
+                            <input type="text" id="from" name="from" autofocus value="04/27/2014">
+                        </div>
+                        <div id="range-to">
+                            <label for="to">To</label>
+                            <input type="text" id="to" name="to" autofocus value="05/27/2014">
+                        </div>
+                        <button class="button" id="range-apply" type="submit">Apply</button>
+                    </form>
+                </div>
+            </li>*@
+        </ul>
+    </div>
+    <div class="segment">
+        <div class="segment-header">
+            <h5>Overall Meeting Effectiveness (OME)</h5>
+            <a href="@Url.Action(MVC.User.ResetToDefault(@Url.Action(MVC.Account.Dashboard())))">Reset to default</a>
+        </div>
+        <div class="segment-body">
+            <div class="graphs">
+                @{
+                    Html.RenderAction(MVC.Account.Ome());
+                }
+                <p>
+                    The chart above demonstrates that OME across the organisation has risen over the period with Accounts and Sales departments showing improved productivity although productivity in the ITdepartment has declined.
+                </p>
+                <p>
+                    The organisation remains below benchmark for the sector and belowapplied OME target.
+                </p>
+            </div>
+            <div class="settings">
+                <div class="settings-sector">
+                    <h5>Groups for comparing</h5>
+                    <form name="groups" method="post" action="#">
+                        @foreach (var userGroup in Model.UserGroups)
+                        {
+                            <div>
+                                <input id="groups-group@(userGroup.Id)" name="groups-group@(userGroup.Id)" @(Model.ShowAnalyticsForAllUserGroups ? "checked=\"checked\"" : string.Empty) 
+                                    type="checkbox" class="checkbox-style userGroup" data-group-id="@(userGroup.Id)">
+                                <label for="groups-group@(userGroup.Id)">
+                                    @userGroup.Name
+                                </label>
+                            </div>
+                        }
+                    </form>
+                </div>
+                <div class="settings-sector">
+                    <form name="target" method="post" action="#">
+                        <div class="checkbox-label-style">
+                            <input id="target-use" name="target-use" type="checkbox" class="checkbox-style" 
+                                   data-href="@Url.Action(MVC.Account.GetOme())"  @(Model.UseTargetLine ? "checked=checked" : "")>
+                            <label for="target-use">
+                                Use Target line
+                            </label>
+                        </div>
+                        <i>Target value</i>
+                        <div id="slider-range">
+                            <a class="ui-slider-handle ui-state-default ui-corner-all "><span id="slider-range-value">@Model.TargetLine</span></a>
+                        </div>
+                    </form>
+                    <div class="min-value">0</div>
+                    <div class="max-value">10</div>
+                </div>
+                <div class="settings-sector">
+                    <form name="benchmark" method="post" action="#">
+                        <div class="checkbox-label-style">
+                            <input id="benchmark-use" name="benchmark-use" type="checkbox" class="checkbox-style" @(Model.UseBenchmark ? "checked=checked" : "")>
+                            <label for="benchmark-use">
+                                Use Benchmark
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="settings-sector">
+                    <form name="meeting-types" method="post" action="#">
+                        <div class="checkbox-label-style">
+                            <input id="types-dividing" name="types-dividing" type="checkbox" class="checkbox-style" @(Model.DivideByTypeOfMeeting ? "checked=checked" : "")>
+                            <label for="types-dividing">
+                                Divide by meeting type
+                            </label>
+                        </div>
+                        <div id="meetingtype-face">
+                            <input id="types-face" name="meeting-type-preference" type="radio" class="radio-style"
+                                @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.FaceToFace ? "checked=checked" : "") 
+                                data-value="@(MeetingType.FaceToFace)">
+                            <label for="types-face">
+                                Face-to-face meetings
+                            </label>
+                        </div>
+                        <div id="meetingtype-conference">
+                            <input id="types-conference" name="meeting-type-preference" type="radio" class="radio-style"
+                                @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.ConferenceCallOrOnline ? "checked=checked" : "") 
+                                data-value="@(MeetingType.ConferenceCallOrOnline)">
+                            <label for="types-conference">
+                                Conference Call/Online
+                            </label>
+                        </div>
+                        <div id="meetingtype-combination">
+                            <input id="types-combination" name="meeting-type-preference" type="radio" class="radio-style" 
+                                @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.Combination ? "checked=checked" : "") 
+                                data-value="@(MeetingType.Combination)">
+                            <label for="types-combination">
+                                Combination
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="segment-body">
+            <div class="graphs">
+                <p>
+                    The Performance Factors below highlight possible causes of ineffective meetings, or alternatively may demonstrate that meetings are  functioning well, but there will usually be room for improvement. It is often relatively easy to address these elements via a disciplined approach and with a small amount of effort some significant gains can be achieved and Overall Meeting Effectiveness (as above) will start to improve.
+                </p>
+            </div>
+            <div class="settings">
+                <div class="settings-sector">
+                    <h5>Please select data for displaying</h5>
+                    <form name="data-select" method="post" action="#">
+                        @foreach (var userGroup in Model.UserGroups)
+                        {
+                            <div>
+                                <input id="pie-groups-group@(userGroup.Id)" name="pie-groups-group" @(Model.UserGroups.First().Id == userGroup.Id ? "checked=checked" : "")
+                                    type="radio" class="checkbox-style pieUserGroup" data-group-id="@(userGroup.Id)">
+                                <label for="pie-groups-group@(userGroup.Id)">
+                                    @userGroup.Name
+                                </label>
+                            </div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="performance-factors">
+            <h4>Performance Factors</h4>
+            <img id="PieWait" src="@Url.Content("~/Content/images/wait-big-icon.gif")" style="display: none;"/>
+            <div id="pieChartDiv" class="table">
+                @{
+                    Html.RenderAction(MVC.Account.PieChart());
+                }
+            </div>
+        </div>
+    </div>
+</div>

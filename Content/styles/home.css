@@ -1,0 +1,118 @@
+/* BANNER WITH SLOGAN AND CHART */
+#banner {
+    background-color: #76c3ec;
+    height: 360px;
+}
+#banner .text {
+    padding-top: 90px;
+    width: 530px;
+}
+#banner p {
+    color: #fff;
+    line-height: 24px;
+}
+#banner .wrapper {
+    background: url('../images/bg-banner-shadow.png') no-repeat 160px -80px transparent;
+    height: 100%;
+}
+#banner .chart {
+    background: url('../images/bg-banner-chart.png') no-repeat 0 -65px transparent;
+    bottom: 0;
+    height: 100%;
+    left: 430px;
+    position: absolute;
+    width: 100%;
+}
+#banner .chart img {
+    left: 360px;
+    position: absolute;
+    top: 25px;
+}
+#banner .chart h6 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+    position: absolute;
+    text-transform: uppercase;
+    width: 120px;
+    text-align: center;
+    line-height: 35px;
+    top: 147px;
+    left: 460px;
+}
+#banner .legend {
+    color: #fff;
+    padding: 15px 0 0 48px;
+    position: absolute;
+}
+#banner .legend h5 {
+    font-size: 38px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+#banner .legend-invalid {
+    background: url('../images/bg-chart-legend-invalid.png') no-repeat 0 0 transparent;
+    height: 76px;
+    width: 250px;
+}
+#banner .too-short {
+    left: 600px;
+    top: 170px;
+}
+#banner .too-long {
+    left: 205px;
+    top: 75px;
+}
+#banner .legend-valid {
+    background: url('../images/bg-chart-legend-valid.png') no-repeat 0 0 transparent;
+    bottom: -40px;
+    font-size: 20px;
+    height: 93px;
+    left: 290px;
+    padding: 23px 0 0 60px;
+    width: 240px;
+}
+#banner .legend-valid h5 {
+    font-size: 50px;
+    margin-bottom: 18px;
+}
+
+/* MAIN AREA WITH TEXT */
+#main {
+    padding: 90px 0;
+}
+#main .addon-top {
+    background: url('../images/bg-addon-top.png') 0 0 no-repeat transparent;
+    height: 398px;
+    left: -210px;
+    position: absolute;
+    top: -90px;
+    width: 245px;
+}
+#main .addon-bottom {
+    background: url('../images/bg-addon-bottom.png') 0 0 no-repeat transparent;
+    bottom: -90px;
+    height: 468px;
+    position: absolute;
+    right: -150px;
+    width: 343px;
+}
+#main h2 {
+    margin-bottom: 25px;
+}
+#main .columns {
+    display: table;
+    margin-bottom: 25px;
+    width: 100%;
+}
+#main .column {
+    font-weight: 300;
+    line-height: 30px;
+    display: table-cell;
+    padding-right: 85px;
+    width: 50%;
+}
+#main .column:last-child {
+    padding-left: 20px;
+    padding-right: 59px;
+}

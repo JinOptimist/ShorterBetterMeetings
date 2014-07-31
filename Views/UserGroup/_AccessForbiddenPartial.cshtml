@@ -1,0 +1,16 @@
+﻿@model SBM.Common.Web.ActionResponse
+
+<div class="forbidden-msg">
+    <div class="modal">
+        <button type="button" class="close-modal close-modal-light" title="Close this window">&times;</button>
+        <h3>Access Forbidden</h3>
+        <br/>
+        <div class="control-group">
+            @Model.Message
+        </div>
+        <div class="clear"></div>
+        <button class="button ok-close-light" type="button">
+            <span>Close</span>
+        </button>
+    </div>
+</div>

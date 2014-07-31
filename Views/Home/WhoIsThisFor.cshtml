@@ -1,0 +1,10 @@
+﻿@model SBM.Domain.Models.Entities.StaticPage
+@{
+    ViewBag.Title = SBM.Web.Constants.SiteConstant.SiteName + " | Who is this for?";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/styles/problem")
+
+@Html.Raw(Model.Body)
+      

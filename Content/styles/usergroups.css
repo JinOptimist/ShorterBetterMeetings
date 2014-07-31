@@ -1,0 +1,55 @@
+.segment-body.table {
+	box-sizing: border-box;
+	padding: 20px 25px;
+}
+.segment-body table {
+	border: 1px solid #e3e3e3;
+	border-collapse: collapse;
+	width: 100%;
+}
+.segment-body td {
+	border: 1px solid #e3e3e3;
+	height: 30px;
+	vertical-align: middle;
+	padding: 0 10px;
+	width: 50%;
+}
+.email {
+	font-size: 13px;
+}
+#create-group {
+	background: url("../images/plus.png") no-repeat 0 8px;
+	padding: 0 0 0 15px;
+	text-decoration: none;
+}
+.table-cell-header {
+	background: #e8e9ee;
+	color: #000;
+	display: block;
+}
+.table-cell-header h6 {
+	display: inline-block;
+	padding: 13px;
+}
+.user-group-settings {
+	border-left: 1px solid #c5c9cf;
+	display: block;
+	float: right;
+	padding: 9px 10px;
+}
+.user-group-settings i {
+	display: block;
+	float: right;
+	height: 22px;
+	width: 22px;
+}
+.user-group-ico {
+	background: url("../images/usergroup-icons.png") no-repeat 0 0;
+}
+.invite-colleague-ico {
+	background-position: 0 0;
+}
+.log-out-ico {
+	background-position: -42px 0;
+}
+

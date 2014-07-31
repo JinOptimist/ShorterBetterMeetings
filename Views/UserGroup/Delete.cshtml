@@ -1,0 +1,27 @@
+﻿@model Int64
+
+<div>
+    <div class="modal">
+        <button type="button" class="close-modal close-modal-light" title="Close this window">&times;</button>
+        <h3>Leave user group</h3>
+        <br/>
+        <div class="control-group">
+            Do you really want to leave this group?
+        </div>
+        <div class="table-row">
+            <div class="table-cell">
+                <button class="button remove-group" type="submit" data-url ="@Url.Action(MVC.UserGroup.DeletePost(@Model))">
+                    <span>Yes</span>
+                </button>
+            </div>
+            <div class="table-cell">
+                <button class="button close-modal-light" type="submit">
+                    <span>No</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+

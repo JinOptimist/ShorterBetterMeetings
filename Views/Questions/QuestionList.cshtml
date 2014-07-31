@@ -1,0 +1,113 @@
+﻿@using SBM.Common.Extensions
+@using SBM.Domain.Models.Enums
+@model SBM.Web.Models.Question.QuestionsModel
+
+@{
+    ViewBag.Title = "Question";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/newsurvey")
+@Scripts.Render("~/bundles/questionsEdit")
+
+<div class="container">
+    <h3>Edit Questions</h3>
+    <div class="segment">
+        <div class="segment-body">
+            <form>
+                <ul id="questions">
+                    <li>
+                        <a href="@Url.Action(MVC.Questions.AddQuestion())">
+                            <img border="0" src="@Url.Content("~/Content/images/add-icon.png")"/>
+                        </a>
+                        Add new Questions
+                    </li>
+                    @foreach (var question in Model.Questions)
+                    {
+                        <li id="questionRow@(question.Id)">
+                            <div id="questionText@(question.Id)" class="question" data-id="@question.Id">
+                                @question.QuestionText
+                                @if (question.Type == QuestionType.OME)
+                                {
+                                    <span>1 = Not at all Effective
+                                        <br>
+                                        10 = Very Effective
+                                    </span>
+                                }
+                            </div>
+                            <div style="display: none;" id="questionInput@(question.Id)">
+                                @Html.TextBox("Q" + question.Id, question.QuestionText, new { style = "width: 485px;", @class = "questionInput" })
+                                @*@Html.DropDownList("QuestionType" + question.Id, EnumExtensions.GetDropDown(typeof(QuestionType)), new { style = "width:200px;" })*@
+
+                                <a href="@Url.Action(MVC.Questions.EditQuestion())" class="questionConfirm" id="questionConfirm@(question.Id)" data-id="@(question.Id)" style="display: none;">
+                                    <img border="0" src="@Url.Content("~/Content/images/confirm-icon.png")"/></a>
+                                <a href="#" class="wait" id="questionWait@(question.Id)" data-id="@(question.Id)" style="display: none;">
+                                    <img border="0" src="@Url.Content("~/Content/images/wait-icon.gif")"/></a>
+                                <a  href="@Url.Action(MVC.Questions.DeleteQuestion(question.Id))" class="deleteQuestion" id="questionDelete@(question.Id)"  data-id="@question.Id" data-question-text="@question.QuestionText" style="display: none;">
+                                    <img border="0" src="@Url.Content("~/Content/images/delete-icon.png")"/>
+                                </a>
+                            </div>
+                            @if (question.Type == QuestionType.OME)
+                            {
+                                var j = 0;
+                                foreach (var answer in question.Answers)
+                                {
+                                <div class="answer">
+                                    <input id="effective-@j" disabled="disabled" name="effectiveness" type="radio" class="radio-style " >
+                                    <label for="effective-@j">
+                                        @answer.AnswerText
+                                    </label>
+                                </div>
+                                    j++;
+                                }
+                            }
+                            else
+                            {
+                                foreach (var answer in question.Answers)
+                                {
+                                    var styleAnswer = string.Empty;
+                                    var styleAnswerInput = string.Empty;
+                                    switch (answer.AnswerStyleType)
+                                    {
+                                        case AnswerStyleType.Positive:
+                                            {
+                                                styleAnswer = "button-positive";
+                                                styleAnswerInput = "answer-input-positive";
+                                                break;
+                                            }
+                                        case AnswerStyleType.Negative:
+                                            {
+                                                styleAnswer = "button-negative";
+                                                styleAnswerInput = "answer-input-negative";
+                                                break;
+                                            }
+                                        case AnswerStyleType.Indifferent:
+                                            {
+                                                styleAnswer = "button-indifferent";
+                                                styleAnswerInput = "answer-input-indifferent";
+                                                break;
+                                            }
+                                    }
+                                <a id="answerText@(answer.Id)" href="#" class="button answer @styleAnswer " data-id="@answer.Id">@answer.AnswerText</a>
+                                @Html.TextBox("answerInput" + answer.Id, answer.AnswerText, new { style = "display:none;", @class = "answerInput " + styleAnswerInput })
+                                @Html.DropDownList("AnswerStyle" + answer.Id, EnumExtensions.GetDropDown(typeof(AnswerStyleType), answer.AnswerStyleType), new { style = "width:100px;display:none;", @class = "answerStyle " + styleAnswerInput })
+
+                                <a href="@Url.Action(MVC.Questions.EditAnswer())" class="confirmAnswer" id="answerConfirm@(answer.Id)" data-id="@answer.Id" style="display: none;">
+                                    <img border="0" src="@Url.Content("~/Content/images/confirm-icon.png")"/>
+                                </a>
+                                <a  href="@Url.Action(MVC.Questions.DeleteAnswer(answer.Id))" class="deleteAnswer" id="answerDelete@(answer.Id)"  data-id="@answer.Id" data-answer-text="@answer.AnswerText" style="display: none;">
+                                    <img border="0" src="@Url.Content("~/Content/images/delete-icon.png")"/>
+                                </a>
+                                <a href="#" class="wait" id="answerWait@(answer.Id)" data-id="@(answer.Id)" style="display: none;">
+                                    <img border="0" src="@Url.Content("~/Content/images/wait-icon.gif")"/>
+                                </a>
+                                }
+                            }
+                        </li>
+                    }
+                </ul>
+            </form>
+            <div id="tempDiv" style="display: none;"></div>
+        </div>
+    </div>
+</div>

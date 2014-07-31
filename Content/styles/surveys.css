@@ -1,0 +1,78 @@
+#previous-surveys {
+	margin-top: 30px;
+}
+.segment-body {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;	
+	vertical-align: top;
+	width: 100%;
+}
+.meeting-title, 
+.meeting-details {
+	border-bottom: 1px solid #e3e3e3;
+	display: table-cell;
+	padding: 20px;
+	vertical-align: top;
+}
+.table-row:last-child .meeting-title, 
+.table-row:last-child .meeting-details {
+	border-bottom: none;
+}
+.meeting-title {
+	border-right: 1px solid #e3e3e3;
+	line-height: 22px;
+	width: 150px;
+}
+.meeting-members,
+.meeting-place {
+	display: table-cell;
+}
+.meeting-members {
+	background: url("../images/surveys-members.png") no-repeat 0 3px;
+	line-height: 22px;
+	min-width: 517px;
+	padding: 0 15px 17px 30px;
+}
+
+.meeting-details .button+.button{
+	margin-left: 50px;
+} 
+
+.button {
+	float: left;
+}
+
+.meeting-location {
+	color: #727275;
+	font-size: 13px;
+	line-height: 22px;
+	padding-left: 20px;
+	width: 166px;
+}
+.surveys-ico {
+	background: url("../images/surveys-icons.png") no-repeat 0 0;
+	display: inline-block;
+	height: 17px;
+	margin-right: 7px;
+	vertical-align: middle;
+	width: 14px;
+}
+.ico-date {
+    background-position: 0 0;
+}
+.ico-location {
+    background-position: 0 -23px;
+}
+.measures {
+	background: #f7f7f7;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 15px 0 30px; 
+}
+.segment .previous-surveys {
+	background: #e8e9ee;
+}
+.segment .previous-surveys h5 {
+	color: #000;
+}

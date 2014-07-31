@@ -1,0 +1,395 @@
+html, body {
+    color: #231f20;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    height: 100%;
+    line-height: 16px;
+}
+button {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 16px;
+}
+
+h1 {
+    color: #fff;
+    font-size: 43px;
+    font-weight: 300;
+    line-height: 48px;
+    margin-bottom: 20px;
+}
+h1 em {
+    font-weight: 600;
+}
+h2 {
+    color: #d31145;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 34px;
+    margin-bottom: 40px;
+}
+h4 {
+    color: #d31145;
+    font-size: 34px;
+    line-height: 34px;
+    margin-bottom: 15px;
+}
+a {
+    color: #d31145;
+    text-decoration: underline;
+}
+a:hover {
+    text-decoration: none;
+}
+p a {
+    text-decoration: none;
+}
+p a:hover {
+    text-decoration: underline;
+}
+
+.global-wrapper {
+    margin-bottom: -70px;
+    min-height: 100%;
+    min-width: 1240px;
+    overflow: hidden;
+}
+.wrapper {
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    width: 1200px;
+}
+.clear {
+    clear: both;
+}
+.push {
+    height: 70px;
+}
+
+#main {
+    padding: 70px 0;
+}
+
+/* BUTTONS */
+.btn {
+    background: url('../images/sprite-buttons.png') no-repeat 0 0 transparent;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 32px;
+    margin-right: 20px;
+    padding: 1px 6px 1px 8px;
+    outline: none;
+    text-transform: uppercase;
+}
+.btn:hover {
+    background-position: 0 -64px;
+}
+.btn span {
+    background: url('../images/sprite-buttons.png') no-repeat 100% 0 #fff;
+    color: #d31145;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 15px 8px 7px;
+    margin-right: -6px;
+    margin-top: -1px;
+    text-align: center;
+}
+.btn:hover span {
+    background-position: 100% -64px;
+    color: #fff;
+}
+.btn.dark {
+    background: url('../images/sprite-buttons-dark.png') no-repeat 0 0 transparent;
+
+}
+.btn.dark:hover {
+    background-position: 0 -64px;
+}
+.btn.dark span {
+    background: url('../images/sprite-buttons-dark.png') no-repeat 100% 0 #fff;
+    color: #0d7297;
+    }
+.btn.dark:hover span {
+    background-position: 100% -64px;
+	color: #fff;
+}	
+.btn.primary {
+    background: url('../images/sprite-buttons.png') no-repeat 0 -32px transparent;
+}
+.btn.primary:hover {
+    background-position: 0 -64px;
+}
+.btn.primary span {
+    background: url('../images/sprite-buttons.png') no-repeat 100% -32px #fff;
+    color: #fff;
+}
+.btn.primary:hover span {
+    background-position: 100% -64px;
+}
+.btn.blue {
+    background: url('../images/sprite-buttons-blue.png') no-repeat 0 -32px transparent;
+}
+.btn.blue:hover {
+    background-position: 0 -64px;
+}
+.btn.blue span {
+    background: url('../images/sprite-buttons-blue.png') no-repeat 100% -32px #fff;
+    color: #fff;
+}
+.btn.blue:hover span {
+    background-position: 100% -64px;
+}
+.btn::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
+
+/* INPUTS AND FORMS */
+form {
+    background-color: #f9f9fa;
+    padding: 50px;
+}
+label {
+    color: #231f20;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #c1c1c6;
+    display: inline-block;
+    padding: 8px 10px 7px;
+    width: 470px;
+}
+::-webkit-input-placeholder {
+    color: #a5a5aa;
+}
+::-moz-placeholder {
+    color: #a5a5aa;
+}
+:-ms-input-placeholder {
+    color: #a5a5aa;
+}
+input:-moz-placeholder {
+    color: #a5a5aa;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    vertical-align: text-top;
+}
+form .btn span, form .btn.primary span {
+    background-color: #f9f9fa;
+    padding: 8px 45px 8px 37px;
+}
+.control-group {
+    margin-bottom: 15px;
+}
+.control-group.first-half {
+    float: left;
+    margin-right: 10px;
+    width: 230px;
+}
+.control-group.last-half {
+    float: left;
+    width: 230px;
+}
+.control-group.first-half input, .control-group.last-half input {
+    width: 230px;
+}
+.control-group .hint {
+    color: #d31145;
+    display: inline-block;
+    font-size: 13px;
+    margin-left: 20px;
+    width: 460px;
+    vertical-align: middle;
+}
+
+/* HEADER */
+#header {
+    height: 100px;
+}
+#header a {
+    font-size: 14px;
+}
+#logo {
+    display: inline-block;
+    margin-top: 22px;
+    margin-right: 33px;
+    vertical-align: top;
+}
+#header nav {
+    display: inline-block;
+    margin-top: 33px;
+    vertical-align: top;
+}
+#header nav a {
+    margin-right: 32px;
+}
+#header .actions {
+    position: absolute;
+    right: 0;
+    top: 34px;
+}
+
+/* MAIN NAVIGATION */
+#main-menu {
+    background-color: #ededf1;
+}
+#main-menu ul {
+    display: table;
+    width: 100%;
+}
+#main-menu li {
+    display: table-cell;
+    list-style: none;
+    padding: 10px;
+    text-align: center;
+}
+#main-menu a {
+    color: #231f20;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+#main-menu a:hover {
+    color: #d31145;
+}
+
+/* FOOTER */
+#footer {
+    background-color: #6c6b6b;
+    height: 70px;
+    min-width: 1240px;
+}
+#footer .copyright {
+    color: #b9b9bf;
+    font-size: 13px;
+    float: left;
+    margin-top: 26px;
+}
+#footer .links {
+    float: right;
+    margin-top: 20px;
+}
+#footer li {
+    display: inline-block;
+    list-style: none;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+#footer li:last-child {
+    margin: 0;
+}
+#footer a {
+    color: #b9b9bf;
+    font-size: 13px;
+}
+#footer a:hover {
+    color: #fff;
+}
+#footer .ico-link {
+    background: url('../images/sprite-socials.png') 0 0 no-repeat transparent;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+}
+#footer .facebook {
+    background-position: 0 0;
+}
+#footer .facebook:hover {
+    background-position: -30px 0;
+}
+#footer .linkedin {
+    background-position: -60px 0;
+}
+#footer .linkedin:hover {
+    background-position: -90px 0;
+}
+#footer .twitter {
+    background-position: -120px 0;
+}
+#footer .twitter:hover {
+    background-position: -150px 0;
+}
+
+/* MODAL WINDOW */
+.modal-overlay {
+    background-color: rgba(0,0,0,0.5);
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+.modal {
+    background-color: #fff;
+    height: 240px;
+    left: 50%;
+    margin-left: -220px;
+    margin-top: -150px;
+    padding: 30px 40px;
+    position: absolute;
+    top: 50%;
+    width: 360px;
+}
+.modal form {
+    background-color: transparent;
+    padding: 0;
+}
+.modal .close-modal {
+    background: none;
+    border: 0;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 32px;
+    font-weight: 300;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    outline: none;
+}
+.modal input[type="text"],
+.modal input[type="password"],
+.modal input[type="email"] {
+    width: 100%;
+}
+
+/* SPECIFIC STYLES FOR SIGN IN WINDOW */
+#signin .remember {
+    float: left;
+    width: 200px;
+}
+#signin .forgot {
+    float: right;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 2px;
+}
+#signin .btn {
+    float: right;
+    margin: 0;
+}
+
+.sign-in-redirect div.forgot{
+    float: left;
+    margin-top: 10px;
+    width: 300px;    
+}
+
+.sign-in-redirect div.action{
+    float: left;
+    margin: 4px 0 0 22px;    
+}
+

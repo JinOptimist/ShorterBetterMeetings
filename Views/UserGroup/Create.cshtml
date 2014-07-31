@@ -1,0 +1,21 @@
+﻿@model SBM.Web.Models.UserGroup.CreateUserGroupModel
+
+<div id="new-user-group">
+    <div class="modal">
+        <button type="button" class="close-modal close-modal-light" title="Close this window">&times;</button>
+        <h3>New user group</h3>
+        @using (Html.BeginForm(MVC.UserGroup.Create(), FormMethod.Post))
+        {
+            <div class="control-group clear">
+                @Html.TextBoxFor(m => m.Name, new { autofocus = "autofocus", placeholder = "User group name" })
+                <div class="error">@Html.ValidationMessageFor(m => m.Name)</div>
+            </div>
+            <button class="button" type="submit">
+                <span>OK</span>
+            </button>
+        }
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+

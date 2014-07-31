@@ -1,0 +1,75 @@
+﻿@using StringExtensions = SBM.Common.Extensions.StringExtensions
+
+@model SBM.Web.Models.Account.Charts.OmeModel
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            [
+                'Week',
+		    @foreach (var userGroupName in Model.UserGroupNames)
+      {
+            <text>'@userGroupName', </text>
+      }
+		    @if (Model.IsBenchmark)
+      {
+                <text>'Benchmark', </text>
+      }
+		    @if (Model.IsTargetLine)
+      {
+                <text>'Target line', </text>
+      }
+            ],
+        @foreach (var item in Model.Items)
+        {
+    <text>
+        [
+            @item.DateCounter,
+            @foreach (var groupOme in item.AvgGroupOme)
+            {
+            <text>@StringExtensions.DoubleToString(groupOme), </text>
+            }
+            @(Model.IsBenchmark ? item.BenchmarkStr + ", " : string.Empty)
+            @(Model.IsTargetLine ? StringExtensions.DoubleToString(Model.TargetLine) + ", " : string.Empty)
+        ],
+    </text>
+        }
+        ]);
+
+        //data.setColumns([{calc: function(data, row) { return ''; }, type:'string'}, 2, 1]);
+
+        var options = {
+            //title: 'Overall Meeting Effectiveness (OME)',
+            curveType: 'function',
+            //curveType: 'none',
+            legend: { position: 'bottom' },
+            vAxis: {
+                maxValue: '@Model.MaxValue',
+                minValue: '@Model.MinValue',
+                gridlines: { color: '#C0C0C0', count: 11 }
+            },
+            hAxis: {
+                gridlines: { color: '#C0C0C0', count: '@(Model.Items.Count)' },
+                baseline: 'Discrete',
+                format: "@Model.TimeLineStr ##"
+            },
+            colors: [
+                    '#00929F', //Whole Enterprise
+                    '#731472', //User Group1
+                    '#00467F', //User Group2
+                    '#0d7297', //User Group3
+                    '#d31145', //Benchmark
+            ],
+            chartArea: { left: 30, top: 10, width: '90%', height: '90%' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+
+<img id="OmeWait" src="@Url.Content("~/Content/images/wait-big-icon.gif")" style="display: none;"/>
+<div id="chart_div" style="width: 600px; height: 500px; margin: auto; padding-bottom: 20px;"></div>

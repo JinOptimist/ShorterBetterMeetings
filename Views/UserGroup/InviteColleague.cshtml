@@ -1,0 +1,31 @@
+﻿@model SBM.Web.Models.UserGroup.InviteColleagueModel
+
+<div id="invite-colleagues">
+    <div class="modal">
+        <button type="button" class="close-modal close-modal-light" title="Close this window">&times;</button>
+        <h3>Invite  colleagues</h3>
+        @using (Html.BeginForm(MVC.UserGroup.InviteColleague(), FormMethod.Post, new { @class = "invite-colleagues-form" }))
+        {
+            
+            <div class="control-group clear">
+                Select the User Group to offer your colleagues
+                @Html.DropDownListFor(m => m.UserGroupId, Model.UserGroupsList)
+                <div class="error">@Html.ValidationMessageFor(m => m.UserGroupId)</div>
+            </div>
+            <div class="control-group clear">
+                <label for="Emails">
+                    Add colleagues' emails
+                </label>
+                @Html.TextBoxFor(m => m.Emails, new { autofocus = "autofocus" })
+                <span>Separate multiple emails with commas</span>
+                <div class="error">@Html.ValidationMessageFor(m => m.Emails)</div>
+            </div>
+            <div class="error-valid error"></div>
+            <button class="button invite-submit" type="submit">
+                <span>Submit</span>
+            </button>
+        }
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")

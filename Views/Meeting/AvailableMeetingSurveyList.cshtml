@@ -1,0 +1,109 @@
+﻿@model SBM.Web.Models.Meeting.AvailableMeetingSurveyListModel
+
+@{
+    ViewBag.Title = "Meeting Survey";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/surveys")
+@Styles.Render("~/Content/styles/baseaccount-survey")
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Account.Dashboard())">Home</a>
+    </li>
+    <li>/</li>
+    <li>Surveys
+    </li>
+</ul>
+
+<div class="container">
+    <h3>Surveys</h3>
+    <div class="segment">
+        <div class="segment-header">
+            <h5>New Surveys</h5>
+        </div>
+        <div class="segment-body">
+            @foreach (var pms in Model.AvailableMeeting)
+            {
+                <div class="table-row">
+                    <div class="meeting-title">
+                        @pms.Title
+                    </div>
+                    <div class="meeting-details">
+                        <div class="table-row">
+                            <div class="meeting-members">
+                                @foreach (var user in pms.Users)
+                                {
+                                    
+                                    var name = " " + user.FirstName + " " + user.LastName;
+                                    var comma = pms.Users.First().Equals(user) ? string.Empty : ",";
+                                    var result= comma + name;
+                                    @result
+                                }
+                                @foreach (var user in pms.ExternalUsers)
+                                {
+                                    <span title="external user">@user.Email</span>
+                                }
+                            </div>
+                            <div class="meeting-location">
+                                <i class="surveys-ico ico-date"></i>
+                                @pms.StartDate.ToShortDateString() @pms.StartDate.ToShortTimeString()
+                                <br>
+                                <i class="surveys-ico ico-location"></i>
+                                @pms.Location
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <a href="@Url.Action(MVC.Meeting.MeetingSurvey(pms.Id))" class="button button-positive">Take a survey</a>
+                            <a href="@Url.Action(MVC.Meeting.DidntVisitMeeting(pms.Id))" class="button button-negative">Didn’t attend the meeting</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="segment">
+        <div class="segment-header previous-surveys">
+            <h5>Previous Surveys</h5>
+        </div>
+        <div class="segment-body">
+            @foreach (var pms in Model.PreviousMeetings)
+            {
+                <div class="table-row">
+                    <div class="meeting-title">
+                        @pms.Title
+                    </div>
+                    <div class="meeting-details">
+                        <div class="table-row">
+                            <div class="meeting-members">
+                                @foreach (var user in pms.Users)
+                                {
+                                    
+                                    var name = " " + user.FirstName + " " + user.LastName;
+                                    var comma = pms.Users.First().Equals(user) ? string.Empty : ",";
+                                    var result= comma + name;
+                                    @result
+                                }
+                                @foreach (var user in pms.ExternalUsers)
+                                {
+                                    <span title="external user">@user.Email</span>
+                                }
+                            </div>
+                            <div class="meeting-location">
+                                <i class="surveys-ico ico-date"></i>
+                                @pms.StartDate.ToShortDateString() @pms.StartDate.ToShortTimeString()
+                                <br>
+                                <i class="surveys-ico ico-location"></i>
+                                @pms.Location
+                            </div>
+                        </div>
+                        <div class="measures">
+                            Overall meeting effectiveness: @pms.OME<a class="tooltip red-tooltip" style="@(pms.IsClosed ? "display: none;" : "")">*<span>Open meeting</span></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

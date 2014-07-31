@@ -1,0 +1,81 @@
+.article {
+	padding: 70px 0;
+	overflow: hidden;
+}
+
+.bottom-20 {
+	padding-bottom: 20px !important;
+}
+
+.top-40 {
+	padding-top: 40px !important;
+}
+
+p.red {
+	color: #D31145;
+}
+
+p.red a {
+	text-decoration: underline;
+}
+
+.article + .article {
+	padding-top: 20px;
+    position: relative;
+}
+
+.article .addon-top {
+	background: url('../images/bg-addon-top1.png') 0 0 no-repeat transparent;
+	height: 440px;
+	left: 880px;
+	position: absolute;
+    top: 0px;
+	width: 370px;
+}
+.article .addon-bottom {
+	background: url('../images/bg-addon-bottom1.png') 0 0 no-repeat transparent;
+	bottom: -70px;	
+	height: 261px;
+	left: -192px;
+	position: absolute;
+	width: 173px;
+}
+
+.wrapper p, .article-bg ul {
+	font-weight: 300;
+	line-height: 28px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	width: 895px;
+}
+
+#footer>.wrapper>p {
+	margin: 0px;
+	line-height: 70px;
+}
+
+.wrapper h5 {
+	color: #d31145;	
+	font-size: 22px;
+	line-height: 22px;
+	margin-bottom: 10px;
+
+}
+.wrapper p:last-child {
+	margin-bottom: 0;
+}
+.wrapper p:first-child {
+	margin-top: 26px;
+}
+.article-bg {
+	background: #f4fcfe;
+}
+.article-bg ul {
+	padding-left: 35px;
+}
+.article-bg ul li {
+	background: url('../images/list-style.png') no-repeat 0px 12px;
+	padding-left: 22px;
+}
+
+

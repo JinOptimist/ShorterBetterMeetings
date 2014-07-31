@@ -1,0 +1,54 @@
+﻿@model SBM.Domain.Models.Entities.StaticPage
+
+@using SBM.Domain.Authentification
+@{
+    ViewBag.Title = SBM.Web.Constants.SiteConstant.SiteName + " | Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/styles/home")
+
+<div id="banner">
+    <div class="wrapper">
+        <div class="text">
+            <h1>Take <em>Two Minutes</em> a week to save <em>Two Hours</em> a week</h1>
+            <p>
+                We help you engage with colleagues to make meetings shorter,
+                <br />
+                less frequent and more effective. And our entry level solution is FREE.
+            </p>
+        </div>
+        <div class="chart">
+            <img src="~/Content/images/chart.png" alt="Chart" height="312" width="314">
+            <h6>Meeting length</h6>
+            <div class="legend legend-invalid too-long">
+                <h5>65%</h5>
+                meetings too long
+            </div>
+            <div class="legend legend-invalid too-short">
+                <h5>22%</h5>
+                meetings too short
+            </div>
+            <div class="legend legend-valid">
+                <h5>23%</h5>
+                about right
+            </div>
+        </div>
+    </div>
+</div>
+<div id="main">
+    <div class="wrapper">
+        <div class="addon-top"></div>
+        <div class="addon-bottom"></div>
+        @Html.Raw(Model.Body)
+        <button onclick="window.location.href = '@Url.Action(MVC.Home.OurSolution())'" class="btn dark" type="button">
+            <span>Learn more &rsaquo;</span>
+        </button>
+        @if (!Request.IsAuthenticated || FormsAuthenticationHelper.CurrentUser == null)
+        {
+            <button onclick="window.location.href = '@Url.Action(MVC.Account.Register())'" class="btn blue" type="button">
+                <span>Free Trial &rsaquo;</span>
+            </button>
+        }
+    </div>
+</div>

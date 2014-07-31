@@ -1,0 +1,17 @@
+﻿@model HandleErrorInfo
+@{
+    ViewBag.Title = SBM.Web.Constants.SiteConstant.SiteName + " | Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/styles/problem")
+
+<div class="article">
+    <div class="wrapper">
+        <div class="addon-top"></div>
+        <h4>Error</h4>
+        <h5>
+            An unexpected error has occurred. Please contact the system administrator.
+        </h5>
+    </div>
+</div>

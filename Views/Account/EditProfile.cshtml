@@ -1,0 +1,107 @@
+﻿@model SBM.Web.Models.Account.EditProfileModel
+
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/myprofile")
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Home.Index())">Home</a>
+    </li>
+    <li>/</li>
+    <li>My Profile
+    </li>
+</ul>
+<div class="container">
+    <h3>My profile</h3>
+    <div class="segment">
+        <div class="segment-header">
+            <h5>Personal Information</h5>
+            <a href="#" id="personal-info-change">Change Information</a>
+        </div>
+        <div class="segment-body">
+            @using (Html.BeginForm(MVC.Account.EditProfile(), FormMethod.Post, new { name = "personal-info", id = "personal-info" }))
+            {
+                @Html.HiddenFor(m => m.Email)
+                @Html.HiddenFor(m => m.Id)
+                <div class="validation-summary-errors"></div>
+                <div class="control-group clear">
+                    @Html.LabelFor(m => m.FirstName)
+                    <span class="label">
+                        @Model.FirstName
+                    </span>
+                    @Html.TextBoxFor(m => m.FirstName, new { autofocus = "autofocus" })
+                    <div class="error">@Html.ValidationMessageFor(m => m.FirstName)</div>
+                </div>
+                <div class="control-group clear">
+                    @Html.LabelFor(m => m.LastName)
+                    <span class="label">
+                        @Model.LastName
+                    </span>
+                    @Html.TextBoxFor(m => m.LastName, new { autofocus = "autofocus" })
+                    <div class="error">@Html.ValidationMessageFor(m => m.LastName)</div>
+                </div>
+                <div class="control-group last clear">
+                    @Html.LabelFor(m => m.Company)
+                    <span class="label">
+                        @Model.Company
+                    </span>
+                    @Html.TextBoxFor(m => m.Company, new { autofocus = "autofocus", disabled = "true" })
+                </div>
+                <div class="action">
+                    <button class="button primary" type="submit">Save</button>
+                    <button onclick="window.location.href = '@Url.Action(MVC.Account.EditProfile())'"  class="button" type="button">Cancel</button>
+                </div>
+                <div class="clear"></div>
+                @Html.HiddenFor(m => m.Company)
+            }
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="segment">
+        <div class="segment-header">
+            <h5>Account Information</h5>
+        </div>
+        <div class="segment-body" id="account-info">
+            <div class="account-info">
+                <div class="control-group clear">
+                    <span class="account-info-title">Email</span>
+                    <span class="account-info-data">@Model.Email</span>
+                </div>
+                <div class="control-group clear" id="change-password-block">
+                    <span class="account-info-title">Password</span>
+                    <span class="account-info-data">
+                        <a href="#" id="change-password">Change Password
+                        </a>
+                    </span>
+                </div>
+            </div>
+            @using (Html.BeginForm(MVC.Account.ChangePassword(), FormMethod.Post, new { name = "account-info", id = "instead-account-info" }))
+            {
+                <div class="control-group clear">
+                    @Html.LabelFor(m => m.NewPassword)
+                    @Html.TextBoxFor(m => m.NewPassword, new { type = "password", @data_val_required = "The New Password field is required." })
+                    <div class="error">@Html.ValidationMessageFor(m => m.NewPassword)</div>
+                </div>
+                <div class="control-group clear">
+                    @Html.LabelFor(m => m.ConfirmNewPassword)
+                    @Html.TextBoxFor(m => m.ConfirmNewPassword, new { type = "password", @data_val_required = "The Confirm New Password field is required." })
+                    <div class="error">@Html.ValidationMessageFor(m => m.ConfirmNewPassword)</div>
+                </div>                
+                <div class="action">
+                    <button class="button primary change-password-btn" type="submit">Save</button>
+                    <button onclick="window.location.href = '@Url.Action(MVC.Account.EditProfile())'" class="button" type="button">Cancel</button>
+                </div>
+                <div class="clear"></div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

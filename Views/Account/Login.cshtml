@@ -1,0 +1,41 @@
+﻿@model SBM.Web.Models.Account.LoginModel
+
+@{
+    ViewBag.Title = SBM.Web.Constants.SiteConstant.SiteName + " | Sign in";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main" class="sign-in-redirect">
+    <div class="wrapper">
+        <h2>Sign In</h2>
+        @using (Html.BeginForm(MVC.Account.Login(Model.ReturnUrl), FormMethod.Post))
+        {
+            <div class="validation-summary-errors"></div>
+            <div class="control-group">
+                @Html.TextBoxFor(m => m.Email, new { type = "email", placeholder = "Email", autofocus = "autofocus" })
+                <div class="error">@Html.ValidationMessageFor(m => m.Email)</div>
+            </div>
+            <div class="control-group">
+                @Html.TextBoxFor(m => m.Password, new { type = "password", placeholder = "Password" })
+                <div class="error">@Html.ValidationMessageFor(m => m.Password)</div>
+            </div>
+            <div class="control-group remember">
+                <label for="IsPersistent">
+                    @Html.CheckBoxFor(m => m.IsPersistent)
+                    Remember me
+                </label>
+            </div>
+            <div class="control-group forgot">
+                <a href="@Url.Action(MVC.Account.ForgotPassword())">Forgot your password?</a>
+            </div>
+            <div class="control-group action">
+                <button class="btn primary" type="submit" id="sign-in-redirect-btn">
+                    <span>Sign in</span>
+                </button>
+            </div>
+            <div class="clear"></div>
+        }
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")

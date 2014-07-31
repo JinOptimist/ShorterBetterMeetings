@@ -1,0 +1,120 @@
+﻿@using SBM.Common.Extensions
+@using SBM.Domain.Models.Enums
+@model SBM.Web.Models.User.UserSettingsModel
+
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/jqueryui")
+@Styles.Render("~/Content/styles/settings")
+@Styles.Render("~/Content/styles/baseaccount-settings")
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="#">Home</a>
+    </li>
+    <li>/</li>
+    <li>Settings
+    </li>
+</ul>
+<div class="container">
+    <h3>Settings</h3>
+    @using (Html.BeginForm(MVC.User.UserSettings(), FormMethod.Post, new {@class = "settings-form"}))
+    {
+        @Html.HiddenFor(m => m.Id)
+        <div class="segment">
+            <div class="segment-header">
+                <h5>PMS Settings</h5>
+            </div>
+            <div class="segment-body">
+                <div class="checkbox-label-style">
+                    @Html.CheckBoxFor(m => m.ReceivePMS, new { @class = "checkbox-style" })
+                    @Html.LabelFor(m => m.ReceivePMS)
+                </div>
+            </div>
+        </div>
+        <div class="segment">
+            <div class="segment-header">
+                <h5>Default Dashboard View</h5>
+                <a href="@Url.Action(MVC.User.ResetToDefault(@Url.Action(MVC.User.UserSettings())))">Reset to default</a>
+            </div>
+            <div class="segment-body">
+                <div class="box">
+                    <h5>Choose the timeline</h5>
+                    @Html.DropDownListFor(x => x.TimeLine, EnumExtensions.GetDropDown(typeof(TimeLine), Model.TimeLine))
+                </div>
+                <div class="box">
+                    <div class="checkbox-label-style">
+                        @Html.CheckBoxFor(m => m.ShowAnalyticsForAllUserGroups, new { @class = "checkbox-style" })
+                        @Html.LabelFor(m => m.ShowAnalyticsForAllUserGroups)
+                    </div>
+                    @*<a href="#" id="choose-groups">Choose groups</a>*@
+                </div>
+                <div class="box">
+                    <div class="checkbox-label-style">
+                        @Html.CheckBoxFor(m => m.UseTargetLine, new { @class = "checkbox-style" })
+                        @Html.LabelFor(m => m.UseTargetLine)
+                    </div>
+                    <i>Target value </i>
+                    @Html.HiddenFor(m => m.TargetLine)
+                    <div id="slider-range">
+                        <a class="ui-slider-handle ui-state-default ui-corner-all">
+                            <span id="slider-range-value">@Model.TargetLine</span>
+                        </a>
+                    </div>
+                    <div class="min-value">0</div>
+                    <div class="max-value">10</div>
+                </div>
+                <div class="box">
+                    <div class="checkbox-label-style">
+                        @Html.CheckBoxFor(m => m.UseBenchmark, new { @class = "checkbox-style" })
+                        @Html.LabelFor(m => m.UseBenchmark)
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="checkbox-label-style">
+                        @Html.CheckBoxFor(m => m.DivideByTypeOfMeeting, new { @class = "checkbox-style" })
+                        @Html.LabelFor(m => m.DivideByTypeOfMeeting)
+                    </div>
+                    @Html.HiddenFor(m => m.MeetingTypePreference)
+                    <div id="meetingtype-face">
+                        <input id="types-face" name="meeting-type-preference" type="radio" class="radio-style" 
+                                @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.FaceToFace ? "checked=checked" : "") 
+                                data-value="@(MeetingType.FaceToFace)">
+                        <label for="types-face">
+                            Face-to-face meetings
+                        </label>
+                    </div>
+                    <div id="meetingtype-conference">
+                        <input id="types-conference" name="meeting-type-preference" type="radio" class="radio-style"
+                                @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.ConferenceCallOrOnline ? "checked=checked" : "") 
+                                data-value="@(MeetingType.ConferenceCallOrOnline)">
+                        <label for="types-conference">
+                            Conference Call/Online
+                        </label>
+                    </div>
+                    <div id="meetingtype-combination">
+                        <input id="types-combination" name="meeting-type-preference" type="radio" class="radio-style" 
+                                @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.Combination ? "checked=checked" : "") 
+                                data-value="@(MeetingType.Combination)">
+                        <label for="types-combination">
+                            Combination
+                        </label>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="action">
+                        <button class="button primary" id="save-button" type="submit">Save Set</button>
+                        <button class="button" id="cancel-button" type="button" data-returnurl ="@Url.Action(MVC.User.UserSettings())">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+@Scripts.Render("~/bundles/settings")
+@Scripts.Render("~/bundles/uislider")

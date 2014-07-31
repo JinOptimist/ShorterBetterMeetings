@@ -1,0 +1,14 @@
+﻿@model SBM.Web.Models.Account.Charts.PieChartModel
+@if (Model != null)
+{
+    for (var i = 0; i < Model.QuestionModels.Count; i += 2)
+    {
+    <div class="table-row">
+        @Html.Partial("Chatrs/PieChart", Model.QuestionModels[i])
+        @if (i + 1 < Model.QuestionModels.Count)
+        {
+            @Html.Partial("Chatrs/PieChart", Model.QuestionModels[i + 1])
+        }
+    </div>
+    }
+}

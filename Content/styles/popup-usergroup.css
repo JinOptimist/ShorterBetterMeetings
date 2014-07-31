@@ -1,0 +1,138 @@
+/* MODAL WINDOW */
+#invite-colleagues {
+	display: none;
+}
+#new-user-group {
+	display: none;
+	margin-bottom: 30px;
+}
+#new-user-group .control-group {
+	margin-bottom: 30px;
+}
+.modal-overlay {
+    background-color: transparent;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+.modal {
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    left: 50%;
+    margin-left: -180px;
+    margin-top: -120px;
+    padding: 30px 40px;
+    position: absolute;
+    top: 50%;
+    width: 400px;
+}
+.modal form {
+    font-weight: 600;
+    padding-top: 25px;
+}
+.modal .close-modal {
+    background: none;
+    border: 0;
+    color: #ccc;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 18px;
+    outline: none;
+	padding: 0;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.modal select {
+	background: url("../images/select-arrow.png") no-repeat 98.1% 50% #fff;
+	border: 1px solid #c1c1c6;
+	margin-top: 10px;
+}
+.control-group {
+    margin-bottom: 15px;
+}
+.control-group span {
+    color: #7a7a7e;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.modal input[type="text"],
+.modal input[type="password"],
+.modal input[type="email"] {
+    box-sizing: border-box;
+    margin-bottom: 0;
+    width: 100%;
+}
+form .button[type=submit] {
+	background: #d31145;
+	color: #fff;
+	float: right;
+	min-width: 65px;
+}
+
+.find-groups {
+	display: table-row;
+	width: 100%;
+}
+
+.find-groups>div {
+	padding-right: 15px;
+	margin-top:30px;
+}
+
+.find-groups>div>input{
+	padding-left:10px;
+	padding-right:10px;
+	float: left;
+	width:70%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	margin-bottom: 30px;
+}
+
+.table-row.results {
+	display: none;
+}
+
+.table-row.results .button {
+	margin: 0px;
+}
+
+.table-row.results tr>td:last-child {
+	padding:4px;
+}
+
+.find-groups>div>a {
+	height:32px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	float: left;
+	width:30%;
+}
+
+.button {
+	cursor: pointer;
+}
+
+.modal h6 {
+	margin-top: 30px;
+}
+
+.modal form {
+	text-align: center;
+}
+
+#invite-colleagues {
+	display: block;
+}
+#new-user-group {
+	display: block;
+	margin-bottom: 30px;
+}

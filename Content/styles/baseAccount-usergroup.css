@@ -1,0 +1,253 @@
+.button {
+    background: #fff;
+    border: 1px solid #d31145;
+    display: block;
+    font-weight: 600;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    text-align: center;
+}
+
+/* SECTION */
+section {
+    margin-left: 214px;
+    margin-bottom: 70px;
+    position: relative;
+    right: 0;
+    -webkit-transition: margin-left 0.4s ease-in-out;
+    -moz-transition: margin-left 0.4s ease-in-out;
+    -o-transition: margin-left 0.4s ease-in-out;
+    transition: margin-left 0.4s ease-in-out;
+}
+.section-short {
+    margin-left: 72px;
+    -webkit-transition: margin-left 0.4s ease-in-out;
+    -moz-transition: margin-left 0.4s ease-in-out;
+    -o-transition: margin-left 0.4s ease-in-out;
+    transition: margin-left 0.4s ease-in-out;
+}
+
+#range-apply {
+    float: right;
+    width: 64px;
+}
+
+.graphs p {
+    font-size: 14px;
+    line-height: 22px;
+    padding-bottom: 25px;
+}
+.settings {
+    vertical-align: top;
+    width: 290px;
+}
+
+.settings-sector form label {
+    display: block;
+    height: 20px;
+    padding: 8px 10px;
+}
+.settings-sector form label:last-child {
+    padding-bottom: 0px;
+}
+.settings-sector form label:first-child {
+    padding-top: 0px;
+}
+
+.settings-sector i {
+    margin: 10px 0;
+    display: block;
+}
+
+#slider-range a span {
+    top: -20px;
+    position: relative;
+    padding: 0;
+    color: #d31145;
+    width: 16px;
+    text-align: center;
+    display: block;
+    margin: 0;
+}
+
+#hide-show {
+    background: url("../images/arrow.png") no-repeat transparent;
+    background-position: 50% 50%;
+    display: block;
+    float: right;
+    height: 32px;
+    width: 32px;
+    width: 70px;
+}
+
+/* FOOTER */
+#footer {
+    position: relative;
+    background-color: #6c6b6b;
+    height: 70px;
+    width: 100%;
+    z-index: 100;
+    min-width: 1253px;
+    overflow: hidden;
+}
+
+/* BUTTONS */
+.btn {
+    background: url('../images/sprite-buttons.png') no-repeat 0 0 transparent;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 28px;
+    margin-right: 20px;
+    padding: 1px 6px 1px 8px;
+    outline: none;
+    text-transform: uppercase;
+}
+.btn:hover {
+    background-position: 0 -64px;
+}
+.btn span {
+    background: url('../images/sprite-buttons.png') no-repeat 100% 0 #fff;
+    color: #d31145;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 15px 8px 7px;
+    margin-right: -6px;
+    margin-top: -1px;
+    text-align: center;
+}
+.btn:hover span {
+    background-position: 100% -64px;
+    color: #fff;
+}
+.btn.primary {
+    background: url('../images/sprite-buttons.png') no-repeat 0 -32px transparent;
+}
+.btn.primary:hover {
+    background-position: 0 -64px;
+}
+.btn.primary span {
+    background: url('../images/sprite-buttons.png') no-repeat 100% -32px #fff;
+    color: #fff;
+}
+.btn.primary:hover span {
+    background-position: 100% -64px;
+}
+.btn::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #c1c1c6;
+    display: inline-block;
+    padding: 8px 10px 7px;
+    width: 470px;
+}
+::-webkit-input-placeholder {
+    color: #a5a5aa;
+}
+::-moz-placeholder {
+    color: #a5a5aa;
+}
+:-ms-input-placeholder {
+    color: #a5a5aa;
+}
+input:-moz-placeholder {
+    color: #a5a5aa;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    vertical-align: text-top;
+}
+form .btn span, form .btn.primary span {
+    background-color: #f9f9fa;
+    padding: 8px 45px 8px 37px;
+}
+.control-group {
+    margin-bottom: 15px;
+}
+.control-group.first-half {
+    float: left;
+    margin-right: 10px;
+    width: 230px;
+}
+.control-group.last-half {
+    float: left;
+    width: 230px;
+}
+.control-group.first-half input, .control-group.last-half input {
+    width: 230px;
+}
+.control-group .hint {
+    color: #d31145;
+    display: inline-block;
+    font-size: 13px;
+    margin-left: 20px;
+    width: 460px;
+    vertical-align: middle;
+}
+
+/* Custom*/
+
+.find-groups .find-groups-form button {
+	height:32px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	float: left;
+	width:30%;
+}
+
+.find-groups .find-groups-form input[type="email"]{
+	float: left;
+	width:70%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	margin-bottom: 10px;
+
+    padding: 1px 0 1px 10px;
+    display: block;
+    margin-top: 0;
+}
+
+.find-groups form {
+	padding-right: 15px;
+	margin-top:30px;
+}
+
+.find-groups-form .button {
+    display: block;
+    float: left;
+    margin: 0;
+	background: #ffffff;
+    color: #d31145 ;
+}
+
+.find-groups-form .error {
+    margin-bottom: 20px;
+}
+
+.find-groups-form .button:hover {
+background: #d31145;
+color: #fff;
+}
+
+.table-row-join {
+    display: table-row;
+    
+}
+
+.table-cell-join {
+    display: table-cell;
+    /*padding-bottom: 30px;*/
+    width: 50%;
+}
+

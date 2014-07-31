@@ -1,0 +1,116 @@
+﻿@using SBM.Domain.Models.Enums
+@model SBM.Web.Models.Account.DetailedAnalysisModel
+@{
+    ViewBag.Title = "Detailed Analysis";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@Styles.Render("~/Content/styles/detailedanalysis")
+
+@Scripts.Render("~/bundles/detailedAnalysis")
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Home.Index())">Home</a>
+    </li>
+    <li>/</li>
+    <li>Detailed Analysis
+    </li>
+</ul>
+<div class="container">
+    @Html.Hidden("UpdateDetailedAnalysisChartUrl", Url.Action(MVC.Account.GetDetailedAnalysisChart()))
+    @Html.Hidden("UpdateDateRangeUrl", Url.Action(MVC.Account.GetDateRange()))
+    <h3>Detailed Analysis</h3>
+    <div class="calendar">
+        @{
+          var curCulture = new System.Globalization.CultureInfo("en-US", false); 
+        <a href="#" class="calendar-toggle" id="calendar-toggle">@Model.StartDate.ToString("MMMM dd,yyyy", curCulture) - @Model.EndDate.ToString("MMMM dd,yyyy", curCulture)  @*February 27,2014 - May 27,2014*@
+        </a>
+        }
+        <ul class="calendar-dropdown" id="calendar-dropdown">
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Week ? "primary" : "")" type="button"  data-value="@TimeLine.Week">A week</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Week2 ? "primary" : "")" type="button"  data-value="@TimeLine.Week2">2 weeks</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month ? "primary" : "")" type="button" data-value="@TimeLine.Month">A month</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month3 ? "primary" : "")" type="button"  data-value="@TimeLine.Month3">3 Months</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month6 ? "primary" : "")" type="button"  data-value="@TimeLine.Month6">6 Months</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month12 ? "primary" : "")" type="button"  data-value="@TimeLine.Month12">12 Months</button>
+            </li>
+            <li>
+                <button class="button @(Model.TimeLine == TimeLine.Month24 ? "primary" : "")" type="button"  data-value="@TimeLine.Month24">24 Months</button>
+            </li>
+            @*<li>
+                <button class="button" id="range-toggle" type="button">Custom Range</button>
+                <div id="range-dropdown">
+                    <form name="period" method="post" action="#">
+                        <div id="range-from">
+                            <label for="from">From</label>
+                            <input type="text" id="from" name="from" autofocus value="04/27/2014">
+                        </div>
+                        <div id="range-to">
+                            <label for="to">To</label>
+                            <input type="text" id="to" name="to" autofocus value="05/27/2014">
+                        </div>
+                        <button class="button" id="range-apply" type="submit">Apply</button>
+                    </form>
+                </div>
+            </li>*@
+        </ul>
+    </div>
+    <div class="segment">
+        <div class="segment-header">
+            <h5>Performace Factors Summary</h5>
+        </div>
+        <div class="segment-body">
+            <div class="graphs">
+                @{
+                    Html.RenderAction(MVC.Account.DetailedAnalysisChart());
+                }
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+                </p>
+                <p>
+                    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. 
+                </p>
+            </div>
+            <div class="settings">
+                <div class="settings-sector">
+                    <h5>Groups for comparing</h5>
+                    <form name="groups" method="post" action="#">
+                        @foreach (var userGroup in Model.UserGroups)
+                        {
+                            <div>
+                                <input id="groups-group@(userGroup.Id)" name="groups-group@(userGroup.Id)" checked="checked"
+                                       type="checkbox" class="checkbox-style userGroup" data-group-id="@(userGroup.Id)">
+                                <label for="groups-group@(userGroup.Id)">
+                                    @userGroup.Name
+                                </label>
+                            </div>
+                        }
+                    </form>
+                </div>
+                <div class="settings-sector">
+                    <h5>Performance Factor</h5>
+                    <form name="target" method="post" action="#">
+                        <select id="question">
+                            @foreach (var question in Model.Questions)
+                            {
+                                <option @(Model.DefaultQuestionId == question.Id ? "selected='selected'" : "") value="@question.Id">@question.QuestionText</option>
+                            }
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

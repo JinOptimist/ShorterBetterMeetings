@@ -1,0 +1,35 @@
+﻿@using SBM.Common.Extensions
+@using SBM.Domain.Models.Enums
+@model SBM.Domain.Models.Entities.Answer
+@{
+    ViewBag.Title = "AddAnswer";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+@using (Html.BeginForm(MVC.Questions.AddAnswer(), FormMethod.Post))
+{
+    <h2>Add Answer</h2>
+    <h4>@Html.Raw(Model.Question.QuestionText)</h4>
+    @Html.HiddenFor(x => x.Question.Id)
+    if (Model.Question.Answers != null)
+    {
+        var i = 0;
+        foreach (var answer in Model.Question.Answers)
+        {
+            <div>
+                @(++i)-@Html.Raw(answer.AnswerText)
+            </div>
+        }
+    }
+    <div>
+        @Html.TextBoxFor(x => x.AnswerText, new { style = "width: 300px;" })
+        @Html.DropDownListFor(x => x.AnswerStyleType, EnumExtensions.GetDropDown(typeof (AnswerStyleType)), new { style = "width: 100px;" })
+    </div>
+    <button class="button" type="submit">
+        Add new Answer
+    </button>
+
+    @Html.ActionLink("Finish", MVC.Questions.QuestionList(), new {@class = "button"})
+
+    <div class="clear"></div>
+}

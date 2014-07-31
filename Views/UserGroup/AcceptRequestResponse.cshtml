@@ -1,0 +1,27 @@
+﻿@model SBM.Common.Web.ActionResponse
+
+@{
+    ViewBag.Title = "Accept Request";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Home.Index())">Home</a>
+    </li>
+    <li>/</li>
+    <li>
+        <a href="@Url.Action(MVC.UserGroup.MyUserGroups())">User Groups</a>
+    </li>
+    <li>/</li>
+    <li>Accept Request</li>
+</ul>
+<div class="container">
+    <div>
+        <h3>User have been added</h3>
+        <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.</h6>
+        <br />
+        <br />
+        <a href="@Url.Action(MVC.UserGroup.MyUserGroups())">Return To My User Groups</a>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model SBM.Common.Web.ActionResponse
+
+@{
+    ViewBag.Title = "Access Forbidden";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<ul class="breadcrumbs">
+    <li>
+        <a href="@Url.Action(MVC.Home.Index())">Home</a>
+    </li>
+    <li>/</li>
+    <li>
+        <a href="@Url.Action(MVC.UserGroup.MyUserGroups())">User Groups</a>
+    </li>
+    <li>/</li>
+    <li>Access Forbidden</li>
+</ul>
+<div class="container">
+    <div>
+        @if (!Model.IsSuccess)
+        {
+            <h3>Access Forbidden</h3>
+            <h6>@Model.Message</h6>
+        }
+        <br/>
+        <br/>
+        <a href="@Url.Action(MVC.UserGroup.MyUserGroups())">Return To My User Groups</a>
+    </div>
+</div>

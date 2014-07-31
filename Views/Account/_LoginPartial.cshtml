@@ -1,0 +1,37 @@
+﻿@model SBM.Web.Models.Account.LoginModel
+
+<div id="signin">
+    <div class="modal">
+        <button type="button" class="close-modal" title="Close this window">&times;</button>
+        <h4>Sign In</h4>
+        @using (Html.BeginForm(MVC.Account.Login(Model.ReturnUrl), FormMethod.Post))
+        {
+            <div class="validation-summary-errors"></div>
+            <div class="control-group">
+                @Html.TextBoxFor(m => m.Email, new { type = "email", placeholder = "Email", autofocus = "autofocus" })
+                <div class="error">@Html.ValidationMessageFor(m => m.Email)</div>
+            </div>
+            <div class="control-group">
+                @Html.TextBoxFor(m => m.Password, new { type = "password", placeholder = "Password" })
+                <div class="error">@Html.ValidationMessageFor(m => m.Password)</div>
+            </div>
+            <div class="control-group remember">
+                <label for="IsPersistent">
+                    @Html.CheckBoxFor(m => m.IsPersistent)
+                    Remember me
+                </label>
+            </div>
+            <div class="control-group forgot">
+                <a href="@Url.Action(MVC.Account.ForgotPassword())">Forgot your password?</a>
+            </div>
+            <div class="clear"></div>
+            <button class="btn primary" type="submit" id="signin-btn">
+                <span>Sign in</span>
+            </button>
+            <div class="clear"></div>
+        }
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jqueryval")
