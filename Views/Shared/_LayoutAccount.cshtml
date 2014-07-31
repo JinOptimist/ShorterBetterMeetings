@@ -10,7 +10,11 @@
     if (user != null)
     {
         var pmsRepository = DependencyResolver.Current.GetService<IPMSRepository>();
-        newMeeint = pmsRepository.GetAvalibleMeeting(user, 10);
+		if (pmsRepository != null)
+		{
+			newMeeint = pmsRepository.GetAvalibleMeeting(user, 10);
+		}
+		
         newMeetingCount = pmsRepository.GetCountAvalibleMeeting(user);
     }
 }
