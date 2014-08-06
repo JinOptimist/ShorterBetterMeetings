@@ -1,4 +1,5 @@
-﻿@using SBM.Domain.Models.Enums
+﻿@using SBM.Common.Extensions
+@using SBM.Domain.Models.Enums
 @model SBM.Web.Models.Account.DetailedAnalysisModel
 @{
     ViewBag.Title = "Detailed Analysis";
@@ -28,27 +29,20 @@
         </a>
         }
         <ul class="calendar-dropdown" id="calendar-dropdown">
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Week ? "primary" : "")" type="button"  data-value="@TimeLine.Week">A week</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Week2 ? "primary" : "")" type="button"  data-value="@TimeLine.Week2">2 weeks</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month ? "primary" : "")" type="button" data-value="@TimeLine.Month">A month</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month3 ? "primary" : "")" type="button"  data-value="@TimeLine.Month3">3 Months</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month6 ? "primary" : "")" type="button"  data-value="@TimeLine.Month6">6 Months</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month12 ? "primary" : "")" type="button"  data-value="@TimeLine.Month12">12 Months</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month24 ? "primary" : "")" type="button"  data-value="@TimeLine.Month24">24 Months</button>
-            </li>
+            @{
+                var timelineValues = Enum.GetValues(typeof(TimeLine));
+                for (int i = 0; i < timelineValues.Length; i++)
+                {
+                    var currentTimeLine = (TimeLine) timelineValues.GetValue(i);
+                    <li>
+                        <button class="button @(Model.TimeLine == (currentTimeLine) ? "primary" : "")" type="button" data-value="@currentTimeLine">
+                            @EnumExtensions.GetEnumDisplayName(typeof(TimeLine),i) 
+                        </button>
+                    @* <button class="button @(Model.TimeLine == TimeLine.Week2 ? "primary" : "")" type="button"  data-value="@TimeLine.Week2">2 weeks</button>*@
+                    </li>
+                }
+            }
+            </ul>
             @*<li>
                 <button class="button" id="range-toggle" type="button">Custom Range</button>
                 <div id="range-dropdown">
@@ -65,7 +59,6 @@
                     </form>
                 </div>
             </li>*@
-        </ul>
     </div>
     <div class="segment">
         <div class="segment-header">

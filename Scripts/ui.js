@@ -126,8 +126,20 @@
         $('#change-password').hide();
     });
 })();
- 
-    
 
-
+$(document).ready(function () {
+    $('.forbid-space').keypress(function (e) {
+        var keyCodeSymbolSpace = 32;
+        if (e.keyCode == keyCodeSymbolSpace) {
+            return false;
+        }
+    });
     
+    $('.forbid-lt-gt').keypress(function (e) {
+        var keyCodeSymbolLessThan = 60;
+        var keyCodeSymbolGreaterThan = 62;
+        if (e.keyCode == keyCodeSymbolLessThan || e.keyCode == keyCodeSymbolGreaterThan) {
+            return false;
+        }
+    });
+});

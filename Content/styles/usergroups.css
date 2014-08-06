@@ -26,6 +26,7 @@
 	background: #e8e9ee;
 	color: #000;
 	display: block;
+    margin-top: 20px;
 }
 .table-cell-header h6 {
 	display: inline-block;

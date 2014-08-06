@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $("#target-use").change(function () {
+        $(".targetLineValue").toggle();
+        
         updateOme();
+        
         return false;
     });
 
@@ -22,52 +25,28 @@ $(document).ready(function () {
         return false;
     });
 
-
     $("#types-dividing").change(function () {
-        //var divideByMeetingType = $("#types-dividing:checked").length > 0;
-        //var meetingTypePreference = $("[name=meeting-type-preference]");
-        //if (!divideByMeetingType) {
-        //    meetingTypePreference.attr('disabled', 'disabled');
-        //    meetingTypePreference.next().addClass("disabled");
-        //    meetingTypePreference.next().removeClass("checked");
-        //} else {
-        //    meetingTypePreference.removeAttr('disabled');
-        //    meetingTypePreference.next().removeClass("disabled");
-        //    meetingTypePreference.first().next().addClass("checked");
-        //}
+        var isChecked = $(this).is(":checked");
         
-        if ($(this).is(":checked")) {
-            $('#meetingtype-face').removeClass('disabled');
-            $('#meetingtype-conference').removeClass('disabled');
-            $('#meetingtype-combination').removeClass('disabled');
+        $('#meetingtype-face').toggleClass('disabled');
+        $('#meetingtype-conference').toggleClass('disabled');
+        $('#meetingtype-combination').toggleClass('disabled');
+        
+        $('#meetingtype-face input').prop('disabled', !isChecked);
+        $('#meetingtype-conference input').prop('disabled', !isChecked);
+        $('#meetingtype-combination input').prop('disabled', !isChecked);
+        
+        $('#meetingtype-face a').toggleClass('disabled');
+        $('#meetingtype-conference a').toggleClass('disabled');
+        $('#meetingtype-combination a').toggleClass('disabled');
 
-            $('#meetingtype-face input').prop('disabled', false);
-            $('#meetingtype-conference input').prop('disabled', false);
-            $('#meetingtype-combination input').prop('disabled', false);
-
-            $('#meetingtype-face a').removeClass('disabled');
-            $('#meetingtype-conference a').removeClass('disabled');
-            $('#meetingtype-combination a').removeClass('disabled');
-
+        if (isChecked) {
             $('#meetingtype-face input').attr('checked', 'checked');//the first item is checked
             $('#meetingtype-face a').addClass('checked');
         }
         else {
-            $('#meetingtype-face').addClass('disabled');
-            $('#meetingtype-conference').addClass('disabled');
-            $('#meetingtype-combination').addClass('disabled');
-
-            $('#meetingtype-face input').prop('disabled', true);
-            $('#meetingtype-conference input').prop('disabled', true);
-            $('#meetingtype-combination input').prop('disabled', true);
-
-            $('#meetingtype-face a').addClass('disabled').removeClass('checked');
-            $('#meetingtype-conference a').addClass('disabled').removeClass('checked');
-            $('#meetingtype-combination a').addClass('disabled').removeClass('checked');
-
-            $('#meetingtype-face input').removeAttr('checked');
-            $('#meetingtype-conference input').removeAttr('checked');
-            $('#meetingtype-combination input').removeAttr('checked');
+            $('.meetingtype-div a').removeClass('checked');
+            $('.meetingtype-div input').removeClass('checked');
         }
 
         updateOme();
@@ -185,5 +164,9 @@ $(document).ready(function () {
         $('#meetingtype-face input').removeAttr('checked');
         $('#meetingtype-conference input').removeAttr('checked');
         $('#meetingtype-combination input').removeAttr('checked');
-    } 
+    }
+    
+    if (!$('#target-use').is(":checked")) {
+        $(".targetLineValue").hide();
+    }
 });

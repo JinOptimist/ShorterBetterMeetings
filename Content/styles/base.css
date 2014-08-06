@@ -165,7 +165,7 @@ input[type="email"] {
     box-sizing: border-box;
     border: 1px solid #c1c1c6;
     display: inline-block;
-    padding: 8px 10px 7px;
+    padding: 7px 10px;
     width: 470px;
 }
 ::-webkit-input-placeholder {

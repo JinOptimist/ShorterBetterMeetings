@@ -1,20 +1,17 @@
-﻿@using SBM.Domain.Authentification
+﻿@using SBM.Common.Extensions
+@using SBM.Domain.Authentification
 @using SBM.Domain.Models.Entities
 @using SBM.Domain.Models.Enums
 @using SBM.Domain.Repositories.Interfaces
 
 @{
     var user = FormsAuthenticationHelper.CurrentUser;
-    var newMeeint = new List<PMS>();
+    var newMeeting = new List<PMS>();
     var newMeetingCount = 0;
     if (user != null)
     {
         var pmsRepository = DependencyResolver.Current.GetService<IPMSRepository>();
-		if (pmsRepository != null)
-		{
-			newMeeint = pmsRepository.GetAvalibleMeeting(user, 10);
-		}
-		
+        newMeeting = pmsRepository.GetAvalibleMeeting(user, 10);
         newMeetingCount = pmsRepository.GetCountAvalibleMeeting(user);
     }
 }
@@ -80,7 +77,7 @@
                             @*<a href="@Url.Action(MVC.UserGroup.MyUserGroups())">*@
                             <a href="@Url.Action(MVC.UserGroup.InviteColleague())" class="popupLink-light ">
                                 <i class="profile-ico profile-invite"></i>
-                                Invite a collegue
+                                Invite a colleague
                             </a>
                         </li>
                         <li>
@@ -111,10 +108,10 @@
                     <div class="notifications-dropdown" id="notifications-dropdown">
                         <h5>You have @newMeetingCount surveys to take</h5>
                         <ul>
-                            @foreach (var pms in newMeeint)
+                            @foreach (var pms in newMeeting)
                             {
                                 <li>
-                                    <a href="@Url.Action(MVC.Meeting.MeetingSurvey(pms.Id))">@pms.Title
+                                    <a href="@Url.Action(MVC.Meeting.MeetingSurvey(pms.Id))">@pms.Title.Truncate(30)
                                         <span class="date">@pms.EndDate.ToShortDateString()</span>
                                     </a>
                                 </li>

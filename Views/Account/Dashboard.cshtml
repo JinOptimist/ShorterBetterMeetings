@@ -1,4 +1,5 @@
-﻿@using SBM.Domain.Models.Enums
+﻿@using SBM.Common.Extensions
+@using SBM.Domain.Models.Enums
 @model SBM.Web.Models.Account.DashboardModel
 
 @{
@@ -31,48 +32,23 @@
     <span>meeting effectiveness and more</span>
     <div class="calendar">
         @{
-          var curCulture = new System.Globalization.CultureInfo("en-US", false); 
-        <a href="#" class="calendar-toggle" id="calendar-toggle">@Model.StartDate.ToString("MMMM dd,yyyy", curCulture) - @Model.EndDate.ToString("MMMM dd,yyyy", curCulture)  @*February 27,2014 - May 27,2014*@
-        </a>
+            var curCulture = new System.Globalization.CultureInfo("en-US", false); 
+            <a href="#" class="calendar-toggle" id="calendar-toggle">@Model.StartDate.ToString("MMMM dd,yyyy", curCulture) - @Model.EndDate.ToString("MMMM dd,yyyy", curCulture)  @*February 27,2014 - May 27,2014*@
+            </a>
         }
-       <ul class="calendar-dropdown" id="calendar-dropdown">
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Week ? "primary" : "")" type="button"  data-value="@TimeLine.Week">A week</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Week2 ? "primary" : "")" type="button"  data-value="@TimeLine.Week2">2 weeks</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month ? "primary" : "")" type="button" data-value="@TimeLine.Month">A month</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month3 ? "primary" : "")" type="button"  data-value="@TimeLine.Month3">3 Months</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month6 ? "primary" : "")" type="button"  data-value="@TimeLine.Month6">6 Months</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month12 ? "primary" : "")" type="button"  data-value="@TimeLine.Month12">12 Months</button>
-            </li>
-            <li>
-                <button class="button @(Model.TimeLine == TimeLine.Month24 ? "primary" : "")" type="button"  data-value="@TimeLine.Month24">24 Months</button>
-            </li>
-            @*<li>
-                <button class="button" id="range-toggle" type="button">Custom Range</button>
-                <div id="range-dropdown">
-                    <form name="period" method="post" action="#">
-                        <div id="range-from">
-                            <label for="from">From</label>
-                            <input type="text" id="from" name="from" autofocus value="04/27/2014">
-                        </div>
-                        <div id="range-to">
-                            <label for="to">To</label>
-                            <input type="text" id="to" name="to" autofocus value="05/27/2014">
-                        </div>
-                        <button class="button" id="range-apply" type="submit">Apply</button>
-                    </form>
-                </div>
-            </li>*@
+        <ul class="calendar-dropdown" id="calendar-dropdown">
+            @{
+                var timelineValues = Enum.GetValues(typeof(TimeLine));
+                for (int i = 0; i < timelineValues.Length; i++)
+                {
+                    var currentTimeLine = (TimeLine)timelineValues.GetValue(i);
+                <li>
+                    <button class="button @(Model.TimeLine == currentTimeLine ? "primary" : "")" type="button" data-value="@currentTimeLine">
+                        @EnumExtensions.GetEnumDisplayName(typeof(TimeLine), i)
+                    </button>
+                </li>
+                }
+            }
         </ul>
     </div>
     <div class="segment">
@@ -102,7 +78,7 @@
                                 <input id="groups-group@(userGroup.Id)" name="groups-group@(userGroup.Id)" @(Model.ShowAnalyticsForAllUserGroups ? "checked=\"checked\"" : string.Empty) 
                                     type="checkbox" class="checkbox-style userGroup" data-group-id="@(userGroup.Id)">
                                 <label for="groups-group@(userGroup.Id)">
-                                    @userGroup.Name
+                                    @userGroup.Name.Truncate(23)
                                 </label>
                             </div>
                         }
@@ -117,13 +93,15 @@
                                 Use Target line
                             </label>
                         </div>
-                        <i>Target value</i>
-                        <div id="slider-range">
-                            <a class="ui-slider-handle ui-state-default ui-corner-all "><span id="slider-range-value">@Model.TargetLine</span></a>
+                        <div class="targetLineValue">
+                            <i>Target value</i>
+                            <div id="slider-range">
+                                <a class="ui-slider-handle ui-state-default ui-corner-all "><span id="slider-range-value">@Model.TargetLine</span></a>
+                            </div>
                         </div>
                     </form>
-                    <div class="min-value">0</div>
-                    <div class="max-value">10</div>
+                    <div class="min-value targetLineValue">0</div>
+                    <div class="max-value targetLineValue">10</div>
                 </div>
                 <div class="settings-sector">
                     <form name="benchmark" method="post" action="#">
@@ -143,7 +121,7 @@
                                 Divide by meeting type
                             </label>
                         </div>
-                        <div id="meetingtype-face">
+                        <div id="meetingtype-face" class="meetingtype-div">
                             <input id="types-face" name="meeting-type-preference" type="radio" class="radio-style"
                                 @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.FaceToFace ? "checked=checked" : "") 
                                 data-value="@(MeetingType.FaceToFace)">
@@ -151,7 +129,7 @@
                                 Face-to-face meetings
                             </label>
                         </div>
-                        <div id="meetingtype-conference">
+                        <div id="meetingtype-conference" class="meetingtype-div">
                             <input id="types-conference" name="meeting-type-preference" type="radio" class="radio-style"
                                 @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.ConferenceCallOrOnline ? "checked=checked" : "") 
                                 data-value="@(MeetingType.ConferenceCallOrOnline)">
@@ -159,7 +137,7 @@
                                 Conference Call/Online
                             </label>
                         </div>
-                        <div id="meetingtype-combination">
+                        <div id="meetingtype-combination" class="meetingtype-div">
                             <input id="types-combination" name="meeting-type-preference" type="radio" class="radio-style" 
                                 @(Model.DivideByTypeOfMeeting && Model.MeetingTypePreference == MeetingType.Combination ? "checked=checked" : "") 
                                 data-value="@(MeetingType.Combination)">
@@ -187,7 +165,7 @@
                                 <input id="pie-groups-group@(userGroup.Id)" name="pie-groups-group" @(Model.UserGroups.First().Id == userGroup.Id ? "checked=checked" : "")
                                     type="radio" class="checkbox-style pieUserGroup" data-group-id="@(userGroup.Id)">
                                 <label for="pie-groups-group@(userGroup.Id)">
-                                    @userGroup.Name
+                                    @userGroup.Name.Truncate(23)
                                 </label>
                             </div>
                         }

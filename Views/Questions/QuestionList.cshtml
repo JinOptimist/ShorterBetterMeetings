@@ -39,11 +39,11 @@
                                 @Html.TextBox("Q" + question.Id, question.QuestionText, new { style = "width: 485px;", @class = "questionInput" })
                                 @*@Html.DropDownList("QuestionType" + question.Id, EnumExtensions.GetDropDown(typeof(QuestionType)), new { style = "width:200px;" })*@
 
-                                <a href="@Url.Action(MVC.Questions.EditQuestion())" class="questionConfirm" id="questionConfirm@(question.Id)" data-id="@(question.Id)" style="display: none;">
+                                <a href="@Url.Action(MVC.Questions.EditQuestion())" class="questionConfirm icon-image" id="questionConfirm@(question.Id)" data-id="@(question.Id)" style="display: none;">
                                     <img border="0" src="@Url.Content("~/Content/images/confirm-icon.png")"/></a>
-                                <a href="#" class="wait" id="questionWait@(question.Id)" data-id="@(question.Id)" style="display: none;">
+                                <a href="#" class="wait icon-image" id="questionWait@(question.Id)" data-id="@(question.Id)" style="display: none;">
                                     <img border="0" src="@Url.Content("~/Content/images/wait-icon.gif")"/></a>
-                                <a  href="@Url.Action(MVC.Questions.DeleteQuestion(question.Id))" class="deleteQuestion" id="questionDelete@(question.Id)"  data-id="@question.Id" data-question-text="@question.QuestionText" style="display: none;">
+                                <a  href="@Url.Action(MVC.Questions.DeleteQuestion(question.Id))" class="deleteQuestion icon-image" id="questionDelete@(question.Id)"  data-id="@question.Id" data-question-text="@question.QuestionText" style="display: none;">
                                     <img border="0" src="@Url.Content("~/Content/images/delete-icon.png")"/>
                                 </a>
                             </div>
@@ -92,13 +92,13 @@
                                 @Html.TextBox("answerInput" + answer.Id, answer.AnswerText, new { style = "display:none;", @class = "answerInput " + styleAnswerInput })
                                 @Html.DropDownList("AnswerStyle" + answer.Id, EnumExtensions.GetDropDown(typeof(AnswerStyleType), answer.AnswerStyleType), new { style = "width:100px;display:none;", @class = "answerStyle " + styleAnswerInput })
 
-                                <a href="@Url.Action(MVC.Questions.EditAnswer())" class="confirmAnswer" id="answerConfirm@(answer.Id)" data-id="@answer.Id" style="display: none;">
+                                <a href="@Url.Action(MVC.Questions.EditAnswer())" class="confirmAnswer icon-image" id="answerConfirm@(answer.Id)" data-id="@answer.Id" style="display: none;">
                                     <img border="0" src="@Url.Content("~/Content/images/confirm-icon.png")"/>
                                 </a>
-                                <a  href="@Url.Action(MVC.Questions.DeleteAnswer(answer.Id))" class="deleteAnswer" id="answerDelete@(answer.Id)"  data-id="@answer.Id" data-answer-text="@answer.AnswerText" style="display: none;">
+                                <a  href="@Url.Action(MVC.Questions.DeleteAnswer(answer.Id))" class="deleteAnswer icon-image" id="answerDelete@(answer.Id)"  data-id="@answer.Id" data-answer-text="@answer.AnswerText" style="display: none;">
                                     <img border="0" src="@Url.Content("~/Content/images/delete-icon.png")"/>
                                 </a>
-                                <a href="#" class="wait" id="answerWait@(answer.Id)" data-id="@(answer.Id)" style="display: none;">
+                                <a href="#" class="wait icon-image" id="answerWait@(answer.Id)" data-id="@(answer.Id)" style="display: none;">
                                     <img border="0" src="@Url.Content("~/Content/images/wait-icon.gif")"/>
                                 </a>
                                 }

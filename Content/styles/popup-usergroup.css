@@ -57,10 +57,15 @@
     margin-bottom: 15px;
 }
 .control-group span {
-    color: #7a7a7e;
     font-size: 13px;
     font-weight: 400;
     line-height: 20px;
+}
+span div.error {
+    color: red;
+}
+.control-group>span {
+    color: #7a7a7e;
 }
 .modal input[type="text"],
 .modal input[type="password"],
@@ -74,6 +79,7 @@ form .button[type=submit] {
 	color: #fff;
 	float: right;
 	min-width: 65px;
+    margin: 0px;
 }
 
 .find-groups {

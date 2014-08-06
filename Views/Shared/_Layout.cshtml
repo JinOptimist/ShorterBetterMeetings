@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewBag.Title</title>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">  
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
     @Styles.Render("~/Content/styles/reset")
     @Styles.Render("~/Content/styles/base")
     @Styles.Render("~/Content/styles/prettycheckable")
@@ -18,68 +18,85 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/popup")
 
-    
+
     @RenderSection("scripts", required: false)
 </head>
-    <body>
-        <div class="popup"></div>
-        <div class="global-wrapper">
-            <header id="header">
-                <div class="wrapper">
-                    <a href = "@Url.Action(MVC.Home.Index())" id="logo" title="@SBM.Web.Constants.SiteConstant.SiteName | Home">
-                        <img src="~/Content/images/logo.png" alt="@SBM.Web.Constants.SiteConstant.SiteName" height="48" width="425">
-                    </a>
-                    <nav>
-                        <a href="@Url.Action(MVC.Home.AboutUs())">About Us</a>
-                        <a href="@Url.Action(MVC.Home.ContactUs())">Contact Us</a>
-                    </nav>
-                    <div class="actions">
-                        @if (Request.IsAuthenticated && FormsAuthenticationHelper.CurrentUser != null)
-                        {
-                            <button type="button" class="btn blue" onclick="location.href='@Url.Action(MVC.Account.Dashboard())'">
-                                <span>My account</span>
-                            </button>
-                        }
-                        else
-                        {
-                            <button type="button" class="popupBtn btn dark" data-url="@Url.Action(MVC.Account.Login())">
-                                <span>Sign in</span>
-                            </button>
-                            <button type="button" class="btn blue" onclick="location.href='@Url.Action(MVC.Account.Register())'">
-                                <span>Free Trial</span>
-                            </button>
-                        }
-                    </div>
-                </div>
-            </header>
-            <nav id="main-menu">
-                <div class="wrapper">
-                    <ul>
-                        <li><a href="@Url.Action(MVC.Home.ProblemWithMeetings())">Problem with <br />meetings</a></li>
-                        <li><a href="@Url.Action(MVC.Home.WhoIsThisFor())">Who is <br />this for?</a></li>
-                        <li><a href="@Url.Action(MVC.Home.OurSolution())">Our <br />solution</a></li>
-                        <li><a href="@Url.Action(MVC.Home.HowMuchTimeCanWeSave())">How much time <br />can we save?</a></li>
-                        <li><a href="@Url.Action(MVC.Home.ExampleAnalytics())">Example <br />analytics</a></li>
-                        <li><a href="@Url.Action(MVC.Home.SuccessStories())">Success <br />stories</a></li>
-                        <li><a href="@Url.Action(MVC.Home.PremiumAccess())">Premium <br />access</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <div>
-                @RenderBody()
-            </div>
-            <div class="push"></div>
-        </div>
-        <footer id="footer">
+<body>
+    <div class="popup"></div>
+    <div class="global-wrapper">
+        <header id="header">
             <div class="wrapper">
-                <p class="copyright">&copy; 2014 ShorterBetterMeetings. All Rights Reserved</p>
-                <ul class="links">
-                    <li><a href="@Url.Action(MVC.Home.ContactUs())">Contact Us</a></li>
-                    <li><a class="ico-link facebook" href="#" title="Connect with us on Facebook"></a></li>
-                    <li><a class="ico-link linkedin" href="#" title="Connect with us on LinkedIn"></a></li>
-                    <li><a class="ico-link twitter" href="#" title="Connect with us on Twitter"></a></li>
+                <a href = "@Url.Action(MVC.Home.Index())" id="logo" title="@SBM.Web.Constants.SiteConstant.SiteName | Home">
+                    <img src="~/Content/images/logo.png" alt="@SBM.Web.Constants.SiteConstant.SiteName" height="48" width="425">
+                </a>
+                <nav>
+                    <a href="@Url.Action(MVC.Home.AboutUs())">About Us</a>
+                    <a href="@Url.Action(MVC.Home.ContactUs())">Contact Us</a>
+                </nav>
+                <div class="actions">
+                    <noscript>
+                        <span style="color: red;">Without JavaScript you can't use this website</span>
+                    </noscript>
+                    @if (Request.IsAuthenticated && FormsAuthenticationHelper.CurrentUser != null)
+                    {
+                        <button type="button" class="btn blue" onclick="location.href='@Url.Action(MVC.Account.Dashboard())'">
+                            <span>My account</span>
+                        </button>
+                    }
+                    else
+                    {   
+                        <button type="button" class="popupBtn btn dark" data-url="@Url.Action(MVC.Account.Login())">
+                            <span>Sign in</span>
+                        </button>
+                        <button type="button" class="btn blue" onclick="location.href='@Url.Action(MVC.Account.Register())'">
+                            <span>Free Trial</span>
+                        </button>
+                    }
+                </div>
+            </div>
+        </header>
+        <nav id="main-menu">
+            <div class="wrapper">
+                <ul>
+                    <li><a href="@Url.Action(MVC.Home.ProblemWithMeetings())">Problem with
+                        <br />
+                        meetings</a></li>
+                    <li><a href="@Url.Action(MVC.Home.WhoIsThisFor())">Who is
+                        <br />
+                        this for?</a></li>
+                    <li><a href="@Url.Action(MVC.Home.OurSolution())">Our
+                        <br />
+                        solution</a></li>
+                    <li><a href="@Url.Action(MVC.Home.HowMuchTimeCanWeSave())">How much time
+                        <br />
+                        can we save?</a></li>
+                    <li><a href="@Url.Action(MVC.Home.ExampleAnalytics())">Example
+                        <br />
+                        analytics</a></li>
+                    <li><a href="@Url.Action(MVC.Home.SuccessStories())">Success
+                        <br />
+                        stories</a></li>
+                    <li><a href="@Url.Action(MVC.Home.PremiumAccess())">Premium
+                        <br />
+                        access</a></li>
                 </ul>
             </div>
-        </footer>      
-    </body>
+        </nav>
+        <div>
+            @RenderBody()
+        </div>
+        <div class="push"></div>
+    </div>
+    <footer id="footer">
+        <div class="wrapper">
+            <p class="copyright">&copy; 2014 ShorterBetterMeetings. All Rights Reserved</p>
+            <ul class="links">
+                <li><a href="@Url.Action(MVC.Home.ContactUs())">Contact Us</a></li>
+                <li><a class="ico-link facebook" href="#" title="Connect with us on Facebook"></a></li>
+                <li><a class="ico-link linkedin" href="#" title="Connect with us on LinkedIn"></a></li>
+                <li><a class="ico-link twitter" href="#" title="Connect with us on Twitter"></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
 </html>

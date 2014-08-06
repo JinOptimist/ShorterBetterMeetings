@@ -1,4 +1,5 @@
-﻿@model SBM.Web.Models.UserGroup.MyUserGroupModel
+﻿@using SBM.Common.Extensions
+@model SBM.Web.Models.UserGroup.MyUserGroupModel
 
 @{
     ViewBag.Title = "My user groups";
@@ -34,7 +35,7 @@
                         @using (Html.BeginForm(MVC.UserGroup.GetUserGroupByUserEmail(), FormMethod.Post, new { @class = "find-groups-form" }))
                         {
                             <div>
-                                @Html.TextBoxFor(m => m.ColeagueEmail, new { placeholder = "Add colleague's email", type = "email", autofocus="autofocus" })
+                                @Html.TextBoxFor(m => m.ColeagueEmail, new { placeholder = "Add colleague's email", type = "email", autofocus = "autofocus", @class = "forbid-space" })
                                 <button id="get-group-by-useremail" class="button button-negative find-groups-btn" type="submit" data-requestInviteUrl ="@Url.Action(MVC.UserGroup.RequestInvite()) ">
                                     Find Groups
                                 </button>
@@ -60,7 +61,7 @@
                 <div class="table-row">
                     <div class="table-cell" id="userGroup-@group.Id">
                         <div class="table-cell-header">
-                            <h6>@group.Name</h6>
+                            <h6>@group.Name.Truncate(30)</h6>
                             <a class="user-group-settings popupLink-light tooltip red-tooltip" href="@Url.Action(MVC.UserGroup.Delete(group.Id))">
                                 <span>Leave User Group</span>
                                 <i class="user-group-ico log-out-ico"></i>
@@ -70,7 +71,7 @@
                                 <i class="user-group-ico invite-colleague-ico"></i>
                             </a>
                         </div>
-                        <table> 
+                        <table>
                             @foreach (var user in group.Users)
                             {
                                 <tr>
@@ -87,7 +88,7 @@
                         var group2 = Model.UserGroups[i + 1];
                         <div class="table-cell" id="userGroup-@group2.Id">
                             <div class="table-cell-header">
-                                <h6>@group2.Name</h6>
+                                <h6>@group2.Name.Truncate(30)</h6>
                                 <a class="user-group-settings popupLink-light tooltip red-tooltip" href="@Url.Action(MVC.UserGroup.Delete(group2.Id))">
                                     <span>Leave User Group</span>
                                     <i class="user-group-ico log-out-ico"></i>

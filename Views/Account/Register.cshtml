@@ -15,17 +15,17 @@
             @Html.HiddenFor(m => m.ReceivePromotions)
             <div class="control-group first-half">
                 @Html.LabelFor(m => m.FirstName)
-                @Html.TextBoxFor(m => m.FirstName, new { autofocus="autofocus"})
+                @Html.TextBoxFor(m => m.FirstName, new { autofocus = "autofocus", @class = "forbid-lt-gt" })
                 <div class="error">@Html.ValidationMessageFor(m => m.FirstName)</div>
             </div>
             <div class="control-group last-half">
                 @Html.LabelFor(m => m.LastName)
-                @Html.TextBoxFor(m => m.LastName, new { autofocus="autofocus"})
+                @Html.TextBoxFor(m => m.LastName, new { autofocus = "autofocus", @class = "forbid-lt-gt" })
                 <div class="error">@Html.ValidationMessageFor(m => m.LastName)</div>
             </div>                    
             <div class="control-group clear">
                 @Html.LabelFor(m => m.Email)
-                @Html.TextBoxFor(m => m.Email, new { type = "email"}) 
+                @Html.TextBoxFor(m => m.Email, new { type = "email", @class = "forbid-lt-gt" })
                 <span class="hint">Will be user as Username. This is should be your working email or email you use scheduling the meetings</span>
                 <div class="error">@Html.ValidationMessageFor(m => m.Email)</div>
             </div>
@@ -33,7 +33,7 @@
                 @Html.LabelFor(m => m.Password)
                 @Html.PasswordFor(m => m.Password)
                 <span class="hint">Length between 6 and 10 characters</span>
-                <div class="error">@Html.ValidationMessageFor(m => m.Password)</div>
+                <div class="error" style="display: block; width: 470px;">@Html.ValidationMessageFor(m => m.Password)</div>
             </div>
             <div class="control-group clear">
                 @Html.LabelFor(m => m.ConfirmPassword)
@@ -57,5 +57,6 @@
     </div>
 </div>
 
- @Scripts.Render("~/bundles/jqueryval")
-
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/ui")
+@Scripts.Render("~/bundles/formblocker")

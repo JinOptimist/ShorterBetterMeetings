@@ -33,7 +33,7 @@
                     <span class="label">
                         @Model.FirstName
                     </span>
-                    @Html.TextBoxFor(m => m.FirstName, new { autofocus = "autofocus" })
+                    @Html.TextBoxFor(m => m.FirstName, new { autofocus = "autofocus", @class = "forbid-lt-gt" })
                     <div class="error">@Html.ValidationMessageFor(m => m.FirstName)</div>
                 </div>
                 <div class="control-group clear">
@@ -41,7 +41,7 @@
                     <span class="label">
                         @Model.LastName
                     </span>
-                    @Html.TextBoxFor(m => m.LastName, new { autofocus = "autofocus" })
+                    @Html.TextBoxFor(m => m.LastName, new { autofocus = "autofocus", @class = "forbid-lt-gt" })
                     <div class="error">@Html.ValidationMessageFor(m => m.LastName)</div>
                 </div>
                 <div class="control-group last clear">
@@ -84,12 +84,12 @@
             {
                 <div class="control-group clear">
                     @Html.LabelFor(m => m.NewPassword)
-                    @Html.TextBoxFor(m => m.NewPassword, new { type = "password", @data_val_required = "The New Password field is required." })
+                    @Html.TextBoxFor(m => m.NewPassword, new { type = "password", @data_val_required = "The New Password field is required.", @class = "forbid-space forbid-lt-gt" })
                     <div class="error">@Html.ValidationMessageFor(m => m.NewPassword)</div>
                 </div>
                 <div class="control-group clear">
                     @Html.LabelFor(m => m.ConfirmNewPassword)
-                    @Html.TextBoxFor(m => m.ConfirmNewPassword, new { type = "password", @data_val_required = "The Confirm New Password field is required." })
+                    @Html.TextBoxFor(m => m.ConfirmNewPassword, new { type = "password", @data_val_required = "The Confirm New Password field is required.", @class = "forbid-space forbid-lt-gt" })
                     <div class="error">@Html.ValidationMessageFor(m => m.ConfirmNewPassword)</div>
                 </div>                
                 <div class="action">
@@ -104,4 +104,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+    @Scripts.Render("~/bundles/profileEdit")
 }
